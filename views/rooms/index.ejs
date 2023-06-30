@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') %>
+
+<h1>All rooms</h1>
+
+<div class="mb-3">
+    <a href="/rooms/new" >Add Rooms for rent</a>
+</div>
+
+
+<% for (let room of rooms) { %>
+
+    <div class="card mb-3">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <img src="<%= room.image %>" alt="<%= room.title%>" class="img-fluid">
+            </div>
+
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= room.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= room.description %>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <%= room.location %>
+                        </small>
+                    </p>
+                    <a href="/rooms/<%= room.id %>" class="btn btn-primary">
+                        View <%= room.title %>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+<% } %>
+
