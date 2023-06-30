@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const Room = require('./models/rooms');
 
@@ -53,7 +54,9 @@ app.get('/rooms/:id/edit',catchAsync(async (req , res)=>{
 
 //Handle post requests
 app.post('/rooms',catchAsync(async(req , res , next)=>{
-    
+    if(!req.body.room){
+        throw new ExpressError('Invalid room details',400);
+    }
     const room = new Room(req.body.room);
     await room.save();
     res.redirect(`/rooms/${room._id}`);
@@ -76,9 +79,20 @@ app.delete('/rooms/:id',catchAsync(async ( req , res) =>{
     res.redirect('/rooms');
 }));
 
+//If none of urls match then send 404 page not found page
+app.all('*',(req , res , next)=>{
+    next(new ExpressError('Page Not Found',404));
+});
+
 //Validate forms
 app.use((err , req , res , next)=>{
-    res.send('Oh boy! something went wrong');
+
+    const {statusCode=500} = err;
+    if(!err.message){
+        err.message='Something went wrong!';
+    }
+
+    res.status(statusCode).render('error' , {err});
 });
 
 //Start server
