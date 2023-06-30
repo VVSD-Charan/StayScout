@@ -51,19 +51,23 @@ app.get('/rooms/:id/edit',async (req , res)=>{
 
 
 //Handle post requests
-app.post('/rooms',async(req , res)=>{
-    const room = new Room(req.body.room);
-    await room.save();
-    res.redirect(`/rooms/${room._id}`);
+app.post('/rooms',async(req , res , next)=>{
+    try{
+        const room = new Room(req.body.room);
+        await room.save();
+        res.redirect(`/rooms/${room._id}`);
+    }catch(e){
+        next(e);
+    }
 });
 
 
 //Handle put requests
 app.put('/rooms/:id',async(req , res)=>{
     const {id}=req.params;
-    const {title,location} = req.body.room;
+    const {title,location,image,price,description} = req.body.room;
 
-    await Room.findByIdAndUpdate(id,{title,location},{new:true});
+    await Room.findByIdAndUpdate(id,{title,location,image,description,price},{new:true});
     res.redirect(`/rooms/${id}`);
 });
 
@@ -72,6 +76,11 @@ app.delete('/rooms/:id',async ( req , res) =>{
     const {id} = req.params;
     await Room.findByIdAndDelete(id);
     res.redirect('/rooms');
+});
+
+//Validate forms
+app.use((err , req , res , next)=>{
+    res.send('Oh boy! something went wrong');
 });
 
 //Start server
