@@ -10,6 +10,7 @@ const Joi = require('joi');
 const {roomSchema,reviewSchema} = require("./schemas.js");
 const Review = require('./models/review');
 const rooms = require('./routes/rooms');
+const reviews = require('./routes/reviews');
 
 //Connecting to DB
 mongoose.connect('mongodb://127.0.0.1:27017/StayScout',{
@@ -34,45 +35,13 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
-const validateReview = (req , res , next) =>
-{
-    const {error}=reviewSchema.validate(req.body);
-
-    if(error){
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg,400);
-    }else{
-        next();
-    }
-}
-
 app.use('/rooms',rooms);
+app.use('/rooms/:id/reviews',reviews);
 
 //Handle get requests
 app.get('/',(req , res)=>{
     res.render('home');
 });
-
-
-//Handle post requests
-app.post('/rooms/:id/reviews',validateReview,catchAsync(async(req , res) =>{
-    const id = req.params.id;
-    const room = await Room.findById(req.params.id);
-    const review = new Review(req.body.review);
-    room.reviews.push(review);
-    await review.save();
-    await room.save();
-
-    res.redirect(`/rooms/${room._id}`)
-}));
-
-// Handle delete requests
-app.delete('/rooms/:id/reviews/:reviewId',catchAsync(async ( req , res)=>{
-    const {id , reviewId} = req.params;
-    await Room.findByIdAndUpdate(id,{$pull : {reviews : reviewId}},{new : true});
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/rooms/${id}`);
-}));
 
 //If none of urls match then send 404 page not found page
 app.all('*',(req , res , next)=>{
