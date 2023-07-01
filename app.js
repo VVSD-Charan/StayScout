@@ -2,13 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const catchAsync = require('./utils/catchAsync');
+const session = require('express-session');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
-const Room = require('./models/rooms');
-const Joi = require('joi');
-const {roomSchema,reviewSchema} = require("./schemas.js");
-const Review = require('./models/review');
 const rooms = require('./routes/rooms');
 const reviews = require('./routes/reviews');
 
@@ -35,6 +31,13 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
+
+const sessionConfig = {
+    secret : 'eggisveg',
+    resave : false,
+    saveUninitialized : true
+}
+app.use(session(sessionConfig ));
 
 app.use('/rooms',rooms);
 app.use('/rooms/:id/reviews',reviews);
