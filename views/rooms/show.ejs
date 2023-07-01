@@ -1,13 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6 mb-3">
         
         <div class="card mb-3">
             <img src="<%= room.image %>" class="card-img-top" alt="...">
 
             <div class="card-body">
-                <h5 class="card-title"><%= room.title %> </h5>
+                <div style="text-align: center;">
+                    <h5 class="card-title"><%= room.title %> </h5>
+                </div>
                 <p class="card-text"><%= room.description %></p>
             </div>
 
@@ -23,10 +25,12 @@
             </div>
         </div>
 
-        <div class="card-footer text-muted">
-            2 days ago
+        <div class="card-footer text-muted" style="text-align: right;">
+            3 days ago
         </div>
+    </div>
 
+    <div class="col-6">
         <h2>Leave a review</h2>
 
         <!-- Form to add review  -->
@@ -42,15 +46,17 @@
                    Please provide description
                 </div>
             </div>
-            <button class="btn btn-success">Submit Review</button>
+            <div style="text-align: right;">
+                <button class="btn btn-success">Submit Review</button>
+            </div>
         </form>
 
         <!-- Iterate reviews array   -->
         <% for(let review of room.reviews) {%>
 
-            <div class="card">
-                <div class="mb-3">
-                    <p>Rating : <%= review.rating %></p>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Rating : <%= review.rating %></h5>
                     <p> Review : <%= review.body %></p>
                 </div>
             </div>
