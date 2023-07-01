@@ -27,10 +27,19 @@ router.get('/new',(req , res)=>{
 });
 router.get('/:id',catchAsync(async(req , res)=>{
     const room = await Room.findById(req.params.id).populate('reviews');
+
+    if(!room){
+        req.flash('error','Cannot find that room');
+        return res.redirect('/rooms');
+    }
     res.render('rooms/show',{room});
 }));
 router.get('/:id/edit',catchAsync(async (req , res)=>{
     const room = await Room.findById(req.params.id);
+    if(!room){
+        req.flash('error','Cannot find that room');
+        return res.redirect('/rooms');
+    }
     res.render('rooms/edit',{room});
 }));
 
