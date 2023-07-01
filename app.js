@@ -7,7 +7,8 @@ const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const Room = require('./models/rooms');
 const Joi = require('joi');
-const {roomSchema} = require("./schemas.js");
+const {roomSchema,reviewSchema} = require("./schemas.js");
+const Review = require('./models/review');
 
 //Connecting to DB
 mongoose.connect('mongodb://127.0.0.1:27017/StayScout',{
@@ -43,6 +44,17 @@ const validateRoom = (req , res , next) =>
         next();
     }
 }
+const validateReview = (req , res , next) =>
+{
+    const {error}=reviewSchema.validate(req.body);
+
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg,400);
+    }else{
+        next();
+    }
+}
 
 //Handle get requests
 app.get('/',(req , res)=>{
@@ -70,6 +82,16 @@ app.post('/rooms',validateRoom,catchAsync(async(req , res , next)=>{
     const room = new Room(req.body.room);
     await room.save();
     res.redirect(`/rooms/${room._id}`);
+}));
+app.post('/rooms/:id/reviews',validateReview,catchAsync(async(req , res) =>{
+    const id = req.params.id;
+    const room = await Room.findById(req.params.id);
+    const review = new Review(req.body.review);
+    room.reviews.push(review);
+    await review.save();
+    await room.save();
+
+    res.redirect(`/rooms/${room._id}`)
 }));
 
 
