@@ -110,6 +110,12 @@ app.delete('/rooms/:id',catchAsync(async ( req , res) =>{
     await Room.findByIdAndDelete(id);
     res.redirect('/rooms');
 }));
+app.delete('/rooms/:id/reviews/:reviewId',catchAsync(async ( req , res)=>{
+    const {id , reviewId} = req.params;
+    await Room.findByIdAndUpdate(id,{$pull : {reviews : reviewId}},{new : true});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/rooms/${id}`);
+}));
 
 //If none of urls match then send 404 page not found page
 app.all('*',(req , res , next)=>{
