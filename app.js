@@ -9,6 +9,7 @@ const Room = require('./models/rooms');
 const Joi = require('joi');
 const {roomSchema,reviewSchema} = require("./schemas.js");
 const Review = require('./models/review');
+const rooms = require('./routes/rooms');
 
 //Connecting to DB
 mongoose.connect('mongodb://127.0.0.1:27017/StayScout',{
@@ -33,17 +34,6 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
-const validateRoom = (req , res , next) =>
-{
-    const {error} = roomSchema.validate(req.body);
-
-    if(error){
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg,400);
-    }else{
-        next();
-    }
-}
 const validateReview = (req , res , next) =>
 {
     const {error}=reviewSchema.validate(req.body);
@@ -56,33 +46,15 @@ const validateReview = (req , res , next) =>
     }
 }
 
+app.use('/rooms',rooms);
+
 //Handle get requests
 app.get('/',(req , res)=>{
     res.render('home');
 });
-app.get('/rooms',catchAsync(async (req , res) => {
-    const rooms = await Room.find();
-    res.render('rooms/index',{rooms});
-}));
-app.get('/rooms/new',(req , res)=>{
-    res.render('rooms/new');
-});
-app.get('/rooms/:id',catchAsync(async(req , res)=>{
-    const room = await Room.findById(req.params.id).populate('reviews');
-    res.render('rooms/show',{room});
-}));
-app.get('/rooms/:id/edit',catchAsync(async (req , res)=>{
-    const room = await Room.findById(req.params.id);
-    res.render('rooms/edit',{room});
-}));
 
 
 //Handle post requests
-app.post('/rooms',validateRoom,catchAsync(async(req , res , next)=>{
-    const room = new Room(req.body.room);
-    await room.save();
-    res.redirect(`/rooms/${room._id}`);
-}));
 app.post('/rooms/:id/reviews',validateReview,catchAsync(async(req , res) =>{
     const id = req.params.id;
     const room = await Room.findById(req.params.id);
@@ -94,22 +66,7 @@ app.post('/rooms/:id/reviews',validateReview,catchAsync(async(req , res) =>{
     res.redirect(`/rooms/${room._id}`)
 }));
 
-
-//Handle put requests
-app.put('/rooms/:id', validateRoom ,catchAsync(async(req , res)=>{
-    const {id}=req.params;
-    const {title,location,image,price,description} = req.body.room;
-
-    await Room.findByIdAndUpdate(id,{title,location,image,description,price},{new:true});
-    res.redirect(`/rooms/${id}`);
-}));
-
 // Handle delete requests
-app.delete('/rooms/:id',catchAsync(async ( req , res) =>{
-    const {id} = req.params;
-    await Room.findByIdAndDelete(id);
-    res.redirect('/rooms');
-}));
 app.delete('/rooms/:id/reviews/:reviewId',catchAsync(async ( req , res)=>{
     const {id , reviewId} = req.params;
     await Room.findByIdAndUpdate(id,{$pull : {reviews : reviewId}},{new : true});
