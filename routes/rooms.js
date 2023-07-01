@@ -38,6 +38,7 @@ router.get('/:id/edit',catchAsync(async (req , res)=>{
 router.post('/',validateRoom,catchAsync(async(req , res , next)=>{
     const room = new Room(req.body.room);
     await room.save();
+    req.flash('success','Successfully made a new campground');
     res.redirect(`/rooms/${room._id}`);
 }));
 
