@@ -68,7 +68,7 @@ app.get('/rooms/new',(req , res)=>{
     res.render('rooms/new');
 });
 app.get('/rooms/:id',catchAsync(async(req , res)=>{
-    const room = await Room.findById(req.params.id);
+    const room = await Room.findById(req.params.id).populate('reviews');
     res.render('rooms/show',{room});
 }));
 app.get('/rooms/:id/edit',catchAsync(async (req , res)=>{

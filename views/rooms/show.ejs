@@ -29,6 +29,7 @@
 
         <h2>Leave a review</h2>
 
+        <!-- Form to add review  -->
         <form action="/rooms/<%=room._id%>/reviews" method="post" class="mb-3 validated-form" novalidate>
             <div class="mb-3">
                 <label for="rating" class="form-label">Rating</label>
@@ -44,6 +45,17 @@
             <button class="btn btn-success">Submit Review</button>
         </form>
 
+        <!-- Iterate reviews array   -->
+        <% for(let review of room.reviews) {%>
+
+            <div class="card">
+                <div class="mb-3">
+                    <p>Rating : <%= review.rating %></p>
+                    <p> Review : <%= review.body %></p>
+                </div>
+            </div>
+
+        <% } %>
     </div>
 </div>
 
