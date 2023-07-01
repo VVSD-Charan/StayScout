@@ -38,7 +38,7 @@ router.get('/:id/edit',catchAsync(async (req , res)=>{
 router.post('/',validateRoom,catchAsync(async(req , res , next)=>{
     const room = new Room(req.body.room);
     await room.save();
-    req.flash('success','Successfully made a new campground');
+    req.flash('success','Successfully made a new rental house');
     res.redirect(`/rooms/${room._id}`);
 }));
 
@@ -48,6 +48,7 @@ router.put('/:id', validateRoom ,catchAsync(async(req , res)=>{
     const {title,location,image,price,description} = req.body.room;
 
     await Room.findByIdAndUpdate(id,{title,location,image,description,price},{new:true});
+    req.flash('success','Successfully updated room details!');
     res.redirect(`/rooms/${id}`);
 }));
 
@@ -55,6 +56,8 @@ router.put('/:id', validateRoom ,catchAsync(async(req , res)=>{
 router.delete('/:id',catchAsync(async ( req , res) =>{
     const {id} = req.params;
     await Room.findByIdAndDelete(id);
+
+    req.flash('success','Room has been deleted successfully');
     res.redirect('/rooms');
 }));
 
