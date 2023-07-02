@@ -28,7 +28,6 @@ router.get('/new', isLoggedIn ,(req , res)=>{
 });
 router.get('/:id',catchAsync(async(req , res)=>{
     const room = await Room.findById(req.params.id).populate('reviews').populate('author');
-    console.log(room);
 
     if(!room){
         req.flash('error','Cannot find that room');
@@ -38,9 +37,14 @@ router.get('/:id',catchAsync(async(req , res)=>{
 }));
 router.get('/:id/edit',isLoggedIn,catchAsync(async (req , res)=>{
     const room = await Room.findById(req.params.id);
+
     if(!room){
         req.flash('error','Cannot find that room');
         return res.redirect('/rooms');
+    }
+    if(!room.author.equals(req.user._id)){
+        req.flash('error','Only owners can edit room');
+        return res.redirect(`/rooms/${req.params.id}`);
     }
     res.render('rooms/edit',{room});
 }));
@@ -57,6 +61,12 @@ router.post('/',isLoggedIn,validateRoom,catchAsync(async(req , res , next)=>{
 //Handle put requests
 router.put('/:id',isLoggedIn, validateRoom ,catchAsync(async(req , res)=>{
     const {id}=req.params;
+    const room = await Room.findById(id);
+    if(!room.author.equals(req.user._id)){
+        req.flash('error','Only owner of the room can edit the room!');
+        return res.redirect(`/rooms/${id}`);
+    }
+
     const {title,location,image,price,description} = req.body.room;
 
     await Room.findByIdAndUpdate(id,{title,location,image,description,price},{new:true});
