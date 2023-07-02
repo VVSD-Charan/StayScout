@@ -48,6 +48,7 @@ router.get('/:id/edit',isLoggedIn,catchAsync(async (req , res)=>{
 //Handle post requests
 router.post('/',isLoggedIn,validateRoom,catchAsync(async(req , res , next)=>{
     const room = new Room(req.body.room);
+    room.author = req.user._id;
     await room.save();
     req.flash('success','Successfully made a new rental house');
     res.redirect(`/rooms/${room._id}`);
