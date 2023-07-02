@@ -23,6 +23,11 @@ router.get('/',catchAsync(async (req , res) => {
     res.render('rooms/index',{rooms});
 }));
 router.get('/new',(req , res)=>{
+    if(!req.isAuthenticated()){
+        req.flash('error','You must be logged in to add a new rental house');
+        return res.redirect('/login');
+    }
+
     res.render('rooms/new');
 });
 router.get('/:id',catchAsync(async(req , res)=>{
