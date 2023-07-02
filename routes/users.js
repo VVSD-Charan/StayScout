@@ -39,4 +39,14 @@ router.post('/login', passport.authenticate('local', {failureFlash : true, failu
     res.redirect('/rooms');
 });
 
+router.get('/logout',(req , res , next)=>{
+    req.logOut(function(err){
+        if(err){
+            return next(err);
+        }else{
+            req.flash('success','Logged out successfully');
+            res.redirect('/rooms');
+        }
+    });
+});
 module.exports=router;
