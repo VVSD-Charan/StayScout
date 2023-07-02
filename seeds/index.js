@@ -27,6 +27,7 @@ const seedDB = async () =>{
         const random1000 = Math.floor(Math.random()*1000);
 
         const room = new Room({
+            author : '64a12c22899f4a4029296b3b',
             location : `${cities[random1000].city}, ${cities[random1000].state}`,
             title : `${sample(descriptors)} , ${sample(places)}`,
             image : 'https://source.unsplash.com/collection/483251',

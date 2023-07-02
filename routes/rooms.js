@@ -27,7 +27,8 @@ router.get('/new', isLoggedIn ,(req , res)=>{
     res.render('rooms/new');
 });
 router.get('/:id',catchAsync(async(req , res)=>{
-    const room = await Room.findById(req.params.id).populate('reviews');
+    const room = await Room.findById(req.params.id).populate('reviews').populate('author');
+    console.log(room);
 
     if(!room){
         req.flash('error','Cannot find that room');

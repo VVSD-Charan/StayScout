@@ -15,6 +15,7 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%= room.location %></li>
+                <li class="list-group-item text-muted"> Posted by <b><%= room.author.username %></b></li>
                 <li class="list-group-item">₹ <%= room.price %> per month</li>
             </ul>
             <div class="card-body">
