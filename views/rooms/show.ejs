@@ -18,12 +18,15 @@
                 <li class="list-group-item text-muted"> Posted by <b><%= room.author.username %></b></li>
                 <li class="list-group-item">₹ <%= room.price %> per month</li>
             </ul>
-            <div class="card-body">
-                <a href="/rooms/<%=room._id%>/edit" class="card-link btn btn-info">Edit Room</a>
-                <form class="d-inline" action="/rooms/<%= room._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-danger">Delete Room</button>
-                </form>
-            </div>
+
+            <% if(currentUser && room.author.equals(currentUser._id)) { %>
+                <div class="card-body">
+                    <a href="/rooms/<%=room._id%>/edit" class="card-link btn btn-info">Edit Room</a>
+                    <form class="d-inline" action="/rooms/<%= room._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-danger">Delete Room</button>
+                    </form>
+                </div>
+            <% } %>
         </div>
 
         <div class="card-footer text-muted" style="text-align: right;">
