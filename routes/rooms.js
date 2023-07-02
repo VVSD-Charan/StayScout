@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const {roomSchema} = require('../schemas.js');
+const {isLoggedIn} = require('../middleware');
 const ExpressError = require('../utils/ExpressError'); 
 const Room = require('../models/rooms');
 
@@ -22,12 +23,7 @@ router.get('/',catchAsync(async (req , res) => {
     const rooms = await Room.find();
     res.render('rooms/index',{rooms});
 }));
-router.get('/new',(req , res)=>{
-    if(!req.isAuthenticated()){
-        req.flash('error','You must be logged in to add a new rental house');
-        return res.redirect('/login');
-    }
-
+router.get('/new', isLoggedIn ,(req , res)=>{
     res.render('rooms/new');
 });
 router.get('/:id',catchAsync(async(req , res)=>{
@@ -39,7 +35,7 @@ router.get('/:id',catchAsync(async(req , res)=>{
     }
     res.render('rooms/show',{room});
 }));
-router.get('/:id/edit',catchAsync(async (req , res)=>{
+router.get('/:id/edit',isLoggedIn,catchAsync(async (req , res)=>{
     const room = await Room.findById(req.params.id);
     if(!room){
         req.flash('error','Cannot find that room');
@@ -49,7 +45,7 @@ router.get('/:id/edit',catchAsync(async (req , res)=>{
 }));
 
 //Handle post requests
-router.post('/',validateRoom,catchAsync(async(req , res , next)=>{
+router.post('/',isLoggedIn,validateRoom,catchAsync(async(req , res , next)=>{
     const room = new Room(req.body.room);
     await room.save();
     req.flash('success','Successfully made a new rental house');
@@ -57,7 +53,7 @@ router.post('/',validateRoom,catchAsync(async(req , res , next)=>{
 }));
 
 //Handle put requests
-router.put('/:id', validateRoom ,catchAsync(async(req , res)=>{
+router.put('/:id',isLoggedIn, validateRoom ,catchAsync(async(req , res)=>{
     const {id}=req.params;
     const {title,location,image,price,description} = req.body.room;
 
@@ -67,7 +63,7 @@ router.put('/:id', validateRoom ,catchAsync(async(req , res)=>{
 }));
 
 //Handle delete requests
-router.delete('/:id',catchAsync(async ( req , res) =>{
+router.delete('/:id',isLoggedIn ,catchAsync(async ( req , res) =>{
     const {id} = req.params;
     await Room.findByIdAndDelete(id);
 
