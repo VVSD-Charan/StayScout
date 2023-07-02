@@ -18,10 +18,14 @@ router.post('/register',catchAsync(async(req , res) =>{
         const user = new User({email,username});
         const registeredUser = await User.register(user,password);
 
-        console.log(registeredUser);
-        req.flash('success','Welcome to StayScout !');
-    
-        res.redirect('/rooms');
+        req.login(registeredUser,(err)=>{
+            if(err){
+                return next(err);
+            }else{
+                req.flash('success','Welcome to StayScout !');
+                res.redirect('/rooms');
+            }
+        });
     }catch(err){
         req.flash('error',err.message);
         res.redirect('register');
