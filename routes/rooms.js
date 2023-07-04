@@ -16,6 +16,17 @@ const validateRoom = (req , res , next) =>
     }else{
         next();
     }
+};
+
+const isAuthor = async(req , res , next) => {
+    const {id} = req.params;
+    const room = await Room.findById(id);
+
+    if(req.user &&  !room.author.equals(req.user._id)){
+        req.flash('error','Only owners can perform this action!');
+        return res.redirect(`/rooms/${id}`);
+    }
+    next();
 }
 
 //Handling get requests
@@ -35,16 +46,12 @@ router.get('/:id',catchAsync(async(req , res)=>{
     }
     res.render('rooms/show',{room});
 }));
-router.get('/:id/edit',isLoggedIn,catchAsync(async (req , res)=>{
+router.get('/:id/edit',isLoggedIn,isAuthor,catchAsync(async (req , res)=>{
     const room = await Room.findById(req.params.id);
 
     if(!room){
         req.flash('error','Cannot find that room');
         return res.redirect('/rooms');
-    }
-    if(!room.author.equals(req.user._id)){
-        req.flash('error','Only owners can edit room');
-        return res.redirect(`/rooms/${req.params.id}`);
     }
     res.render('rooms/edit',{room});
 }));
@@ -59,13 +66,9 @@ router.post('/',isLoggedIn,validateRoom,catchAsync(async(req , res , next)=>{
 }));
 
 //Handle put requests
-router.put('/:id',isLoggedIn, validateRoom ,catchAsync(async(req , res)=>{
+router.put('/:id',isLoggedIn, isAuthor , validateRoom ,catchAsync(async(req , res)=>{
     const {id}=req.params;
     const room = await Room.findById(id);
-    if(!room.author.equals(req.user._id)){
-        req.flash('error','Only owner of the room can edit the room!');
-        return res.redirect(`/rooms/${id}`);
-    }
 
     const {title,location,image,price,description} = req.body.room;
 
@@ -75,7 +78,7 @@ router.put('/:id',isLoggedIn, validateRoom ,catchAsync(async(req , res)=>{
 }));
 
 //Handle delete requests
-router.delete('/:id',isLoggedIn ,catchAsync(async ( req , res) =>{
+router.delete('/:id',isLoggedIn,isAuthor ,catchAsync(async ( req , res) =>{
     const {id} = req.params;
     await Room.findByIdAndDelete(id);
 
