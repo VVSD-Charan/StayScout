@@ -4,9 +4,11 @@
 <div class="row">
     <div class="col-6 mb-3">
         
+        <!-- Image of room  -->
         <div class="card mb-3">
             <img src="<%= room.image %>" class="card-img-top" alt="...">
 
+            <!-- Room name and description  -->
             <div class="card-body">
                 <div style="text-align: center;">
                     <h5 class="card-title"><%= room.title %> </h5>
@@ -14,12 +16,14 @@
                 <p class="card-text"><%= room.description %></p>
             </div>
 
+            <!-- Room details  -->
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%= room.location %></li>
                 <li class="list-group-item text-muted"> Posted by <b><%= room.author.username %></b></li>
                 <li class="list-group-item">₹ <%= room.price %> per month</li>
             </ul>
 
+            <!-- Update and delete room buttons (only for owner of room) -->
             <% if(currentUser && room.author.equals(currentUser._id)) { %>
                 <div class="card-body">
                     <a href="/rooms/<%=room._id%>/edit" class="card-link btn btn-info">Edit Room</a>
@@ -41,11 +45,8 @@
         <% if(currentUser) { %>
             <!-- Form to add review  -->
             <form action="/rooms/<%=room._id%>/reviews" method="post" class="mb-3 validated-form" novalidate>
-                <!-- <div class="mb-3">
-                    <label for="rating" class="form-label">Rating</label>
-                    <input type="range"  min="1" max="5" id="rating" name="review[rating]">
-                </div> -->
 
+                <!-- Starability stars form  -->
                 <fieldset class="starability-basic" style="width: 100%;">
                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -60,6 +61,7 @@
                     <label for="first-rate5" title="Amazing">5 stars</label>
                   </fieldset>
 
+                <!-- Review text  -->
                 <div class="mb-3" style="margin-top: 2px;">
                     <label class="form-label" for="body">Review</label>
                     <textarea class="form-control" name="review[body]" id="body" cols="30" rows="6" required></textarea>
@@ -67,6 +69,8 @@
                         Please provide description
                     </div>
                 </div>
+
+                <!-- Submit review button -->
                 <div style="text-align: right;">
                     <button class="btn btn-success">Submit Review</button>
                 </div>
@@ -78,18 +82,21 @@
 
             <div class="card mb-3">
                 <div class="card-body" style="padding: 10px 20px;">
-                    <!-- <h5 class="card-title">Rating : <%= review.rating %></h5> -->
+                    
+                    <!-- Name of reviewer  -->
                     <h6 class="card-subtitle mb-2 text-muted" style="font-size: 16px; margin-top: 8px;">By <%= review.author.username %></h6>
 
-                    <!-- Display stars -->
+                    <!-- Display stars using starability -->
                     <div>
                         <p class="starability-result" data-rating="<%= review.rating %>">
                             Rated: <%= review.rating %> stars
                         </p>
                     </div>
 
+                    <!-- Review text  -->
                     <p style="font-size: 16px;"> <%= review.body %></p>
 
+                    <!-- Delete review button (only for author of review) -->
                     <% if(currentUser && review.author.equals(currentUser._id)) { %>
                     <form action="/rooms/<%=room._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
                         <button class="btn btn-sm btn-danger" style="margin-bottom: 5px;">Delete</button>
