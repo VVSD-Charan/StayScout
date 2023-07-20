@@ -9,8 +9,10 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
     cloudinary,
-    folder: 'StayScout',
-    allowedFormats: ['jpeg','jpg','png','jfif']
+    params : {
+        folder: 'StayScout',
+        allowedFormats: ['jpeg','jpg','png','jfif']
+    }
 });
 
 module.exports = {
