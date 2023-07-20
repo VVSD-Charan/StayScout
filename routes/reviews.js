@@ -7,12 +7,10 @@ const Review = require('../models/review');
 const Room=require('../models/rooms');
 const reviews = require('../controllers/reviews');
 
-
-//Handle post requests
 //Post a new review
 router.post('/',isLoggedIn,validateReview,catchAsync(reviews.createReview));
 
-// Handle delete requests
+//Delete review
 router.delete('/:reviewId',isLoggedIn,isReviewAuthor,catchAsync(reviews.deleteReview));
 
 module.exports = router;

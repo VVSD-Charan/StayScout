@@ -1,6 +1,7 @@
 const Review = require('../models/review');
 const Room=require('../models/rooms');
 
+//Add a review
 module.exports.createReview = async(req , res) =>{
     const id = req.params.id;
     const room = await Room.findById(req.params.id);
@@ -14,6 +15,7 @@ module.exports.createReview = async(req , res) =>{
     res.redirect(`/rooms/${room._id}`)
 };
 
+//Delete a review
 module.exports.deleteReview = async ( req , res)=>{
     const {id , reviewId} = req.params;
     await Room.findByIdAndUpdate(id,{$pull : {reviews : reviewId}},{new : true});

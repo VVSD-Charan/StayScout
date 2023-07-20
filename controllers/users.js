@@ -1,9 +1,11 @@
 const User = require('../models/user');
 
+//Render user register form
 module.exports.renderRegister = (req , res)=>{
     res.render('users/register');
 };
 
+//Register user
 module.exports.register = async(req , res) =>{
    
     try{
@@ -25,16 +27,19 @@ module.exports.register = async(req , res) =>{
     }
 };
 
+//Render user login form
 module.exports.renderLogin = (req , res)=>{
     res.render('users/login');
 };
 
+//Login user
 module.exports.login = (req , res)=>{
     req.flash('success','Welcome back!');
     const redirectUrl = res.locals.returnTo || '/rooms';
     res.redirect(redirectUrl);
 };
 
+//Logout user
 module.exports.logout = (req , res , next)=>{
     req.logOut(function(err){
         if(err){

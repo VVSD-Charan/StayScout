@@ -1,14 +1,17 @@
 const Room = require('../models/rooms');
 
+//Render all rooms data
 module.exports.index = async (req , res) => {
     const rooms = await Room.find();
     res.render('rooms/index',{rooms});
 };
 
+//Render add room form
 module.exports.renderNewForm = (req , res)=>{
     res.render('rooms/new');
 };
 
+//Create a new room
 module.exports.createRoom = async(req , res , next)=>{
     const room = new Room(req.body.room);
     room.author = req.user._id;
@@ -17,6 +20,7 @@ module.exports.createRoom = async(req , res , next)=>{
     res.redirect(`/rooms/${room._id}`);
 };
 
+//Render room data
 module.exports.showRoom = async(req , res)=>{
     const room = await Room.findById(req.params.id).populate({
         path : 'reviews',
@@ -32,6 +36,7 @@ module.exports.showRoom = async(req , res)=>{
     res.render('rooms/show',{room});
 };
 
+//Render edit room form
 module.exports.renderEditForm = async (req , res)=>{
     const room = await Room.findById(req.params.id);
 
@@ -42,6 +47,7 @@ module.exports.renderEditForm = async (req , res)=>{
     res.render('rooms/edit',{room});
 };
 
+//Update room data
 module.exports.updateRoom = async(req , res)=>{
     const {id}=req.params;
     const room = await Room.findById(id);
@@ -53,6 +59,7 @@ module.exports.updateRoom = async(req , res)=>{
     res.redirect(`/rooms/${id}`);
 };
 
+//Delete room
 module.exports.deleteRoom = async ( req , res) =>{
     const {id} = req.params;
     await Room.findByIdAndDelete(id);
