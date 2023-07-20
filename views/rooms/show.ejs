@@ -6,7 +6,10 @@
         
         <!-- Image of room  -->
         <div class="card mb-3">
-            <img src="<%= room.image %>" class="card-img-top" alt="...">
+            <!-- <img src="<%= room.image %>" class="card-img-top" alt="..."> -->
+            <% for(let img of room.images) { %>
+                <img src="<%= img.url %>" class="card-img-top" alt="...">
+            <% } %>
 
             <!-- Room name and description  -->
             <div class="card-body">

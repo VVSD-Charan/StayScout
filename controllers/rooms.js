@@ -21,7 +21,6 @@ module.exports.createRoom = async(req , res , next)=>{
     room.author = req.user._id;
     await room.save();
 
-    console.log(room);
     req.flash('success','Successfully made a new rental house');
     res.redirect(`/rooms/${room._id}`);
 };
