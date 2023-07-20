@@ -1,11 +1,14 @@
 <% layout('layouts/boilerplate') %>
 
+<!-- Form to add new room  -->
 <div class="row">
     <h1 class="text-center">
         New room for rent
     </h1>
     <div class="col-6 offset-3">
-        <form action="/rooms" method="post" novalidate class="validated-form">
+        <form action="/rooms" method="post" novalidate class="validated-form" enctype="multipart/form-data">
+
+            <!-- Room title  -->
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" id="title" name="room[title]" required>
@@ -13,6 +16,8 @@
                     Title is a required field
                 </div>
             </div>
+
+            <!-- Room Location  -->
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" id="location" name="room[location]" required>
@@ -20,13 +25,18 @@
                     Location is  required.
                 </div>
             </div>
-            <div class="mb-3">
+
+            <!-- Room image  -->
+            <input type="file" name="image" id="" class="mb-3" multiple>
+            <!-- <div class="mb-3">
                 <label class="form-label" for="image">Image URL</label>
                 <input class="form-control" type="text" id="image" name="room[image]" required>
                 <div class="invalid-feedback">
                     Image is a required field
                 </div>
-            </div>
+            </div> -->
+
+            <!-- Room price  -->
             <div class="mb-3">
                 <label for="price" class="form-label">Room Rent</label>
                 <div class="input-group">
@@ -39,6 +49,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Room description  -->
             <div class="mb-3">
                 <label class="form-label" for="description">Room Description</label>
                 <textarea class="form-control" type="text" id="description" name="room[description]" required></textarea>
@@ -46,6 +58,8 @@
                     Please provide description about room!
                 </div>
             </div>
+
+            <!-- Add room button  -->
             <div class="mb-3" style="text-align: right;">
                 <button class="btn btn-success">Add Tolet Room</button>
             </div>
