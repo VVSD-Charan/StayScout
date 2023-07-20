@@ -6,21 +6,19 @@ const {storeReturnTo} =require('../middleware');
 const passport = require('passport');
 const users = require('../controllers/users');
 
+router.route('/register')
+    //Render register form
+    .get(users.renderRegister)
+    //Add a new user
+    .post(catchAsync(users.register))
 
-//Handle get requests
-//GET register page
-router.get('/register',users.renderRegister);
-
-//Handle post requests
-//Register new user
-router.post('/register',catchAsync(users.register));
-
-//GET login page
-router.get('/login', users.renderLogin);
-
-//Login validation
-router.post('/login',storeReturnTo,passport.authenticate('local', {failureFlash : true, failureRedirect : '/login'}) , users.login);
+router.route('/login')
+    //Render login form
+    .get(users.renderLogin)
+    //Login user
+    .post(storeReturnTo,passport.authenticate('local', {failureFlash : true, failureRedirect : '/login'}) , users.login)
 
 //Logout user
 router.get('/logout',users.logout);
+
 module.exports=router;
