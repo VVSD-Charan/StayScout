@@ -37,23 +37,25 @@
     <div class="col-6">
         <h2>Leave a review</h2>
 
-        <!-- Form to add review  -->
-        <form action="/rooms/<%=room._id%>/reviews" method="post" class="mb-3 validated-form" novalidate>
-            <div class="mb-3">
-                <label for="rating" class="form-label">Rating</label>
-                <input type="range"  min="1" max="5" id="rating" name="review[rating]">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="body">Review</label>
-                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
-                <div class="invalid-feedback">
-                   Please provide description
+        <% if(currentUser) { %>
+            <!-- Form to add review  -->
+            <form action="/rooms/<%=room._id%>/reviews" method="post" class="mb-3 validated-form" novalidate>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range"  min="1" max="5" id="rating" name="review[rating]">
                 </div>
-            </div>
-            <div style="text-align: right;">
-                <button class="btn btn-success">Submit Review</button>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label class="form-label" for="body">Review</label>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                    <div class="invalid-feedback">
+                        Please provide description
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <button class="btn btn-success">Submit Review</button>
+                </div>
+            </form>
+        <% } %>
 
         <!-- Iterate reviews array   -->
         <% for(let review of room.reviews) {%>
@@ -61,6 +63,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Rating : <%= review.rating %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %></h6>
                     <p> Review : <%= review.body %></p>
 
                     <form action="/rooms/<%=room._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
