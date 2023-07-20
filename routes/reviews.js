@@ -5,30 +5,14 @@ const catchAsync = require('../utils/catchAsync');
 const ExpressError=require('../utils/ExpressError');
 const Review = require('../models/review');
 const Room=require('../models/rooms');
+const reviews = require('../controllers/reviews');
 
 
 //Handle post requests
-router.post('/',isLoggedIn,validateReview,catchAsync(async(req , res) =>{
-    const id = req.params.id;
-    const room = await Room.findById(req.params.id);
-    const review = new Review(req.body.review);
-    review.author = req.user._id;
-    room.reviews.push(review);
-    await review.save();
-    await room.save();
-
-    req.flash('success','Review has been added successfully');
-    res.redirect(`/rooms/${room._id}`)
-}));
+//Post a new review
+router.post('/',isLoggedIn,validateReview,catchAsync(reviews.createReview));
 
 // Handle delete requests
-router.delete('/:reviewId',isLoggedIn,isReviewAuthor,catchAsync(async ( req , res)=>{
-    const {id , reviewId} = req.params;
-    await Room.findByIdAndUpdate(id,{$pull : {reviews : reviewId}},{new : true});
-    await Review.findByIdAndDelete(reviewId);
-
-    req.flash('success','Review has been deleted successfully');
-    res.redirect(`/rooms/${id}`);
-}));
+router.delete('/:reviewId',isLoggedIn,isReviewAuthor,catchAsync(reviews.deleteReview));
 
 module.exports = router;
