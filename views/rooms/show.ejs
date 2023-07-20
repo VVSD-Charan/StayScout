@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
 
 <div class="row">
     <div class="col-6 mb-3">
@@ -46,7 +47,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="body">Review</label>
-                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="6" required></textarea>
                     <div class="invalid-feedback">
                         Please provide description
                     </div>
@@ -61,14 +62,22 @@
         <% for(let review of room.reviews) {%>
 
             <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Rating : <%= review.rating %></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %></h6>
-                    <p> Review : <%= review.body %></p>
+                <div class="card-body" style="padding: 10px 20px;">
+                    <!-- <h5 class="card-title">Rating : <%= review.rating %></h5> -->
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 16px; margin-top: 8px;">By <%= review.author.username %></h6>
+
+                    <!-- Display stars -->
+                    <div>
+                        <p class="starability-result" data-rating="<%= review.rating %>">
+                            Rated: <%= review.rating %> stars
+                        </p>
+                    </div>
+
+                    <p style="font-size: 16px;"> <%= review.body %></p>
 
                     <% if(currentUser && review.author.equals(currentUser._id)) { %>
                     <form action="/rooms/<%=room._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <button class="btn btn-sm btn-danger" style="margin-bottom: 5px;">Delete</button>
                     </form>
                     <% } %>
                 </div>
