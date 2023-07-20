@@ -5,27 +5,23 @@ const catchAsync = require('../utils/catchAsync');
 const {isLoggedIn,isAuthor,validateRoom} = require('../middleware');
 const Room = require('../models/rooms');
 
+router.route('/')
+    //Render all rooms
+    .get(catchAsync(rooms.index))
+    //Create a new room
+    .post(isLoggedIn,validateRoom,catchAsync(rooms.createRoom))
 
-//Render all rooms
-router.get('/',catchAsync(rooms.index)); 
-//Render new room Form
 router.get('/new', isLoggedIn ,rooms.renderNewForm);
-//Render room data
-router.get('/:id',catchAsync(rooms.showRoom));
-//Render Edit Form
+
+router.route('/:id')
+    //Render room data
+    .get(catchAsync(rooms.showRoom))
+    //Update room data
+    .put(isLoggedIn, isAuthor , validateRoom ,catchAsync(rooms.updateRoom))
+    //Delete the room
+    .delete(isLoggedIn,isAuthor ,catchAsync(rooms.deleteRoom))
+
 router.get('/:id/edit',isLoggedIn,isAuthor,catchAsync(rooms.renderEditForm));
-
-
-//Handle post requests
-//Handling create room post request
-router.post('/',isLoggedIn,validateRoom,catchAsync(rooms.createRoom));
-
-//Handle put requests
-router.put('/:id',isLoggedIn, isAuthor , validateRoom ,catchAsync(rooms.updateRoom));
-
-//Handle delete requests
-//Delete room
-router.delete('/:id',isLoggedIn,isAuthor ,catchAsync(rooms.deleteRoom));
 
 module.exports = router;
 
