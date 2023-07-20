@@ -12,10 +12,7 @@ router.route('/')
     //Render all rooms
     .get(catchAsync(rooms.index))
     //Create a new room
-    // .post(isLoggedIn,validateRoom,catchAsync(rooms.createRoom))
-    .post(upload.array('image'),(req,res)=>{
-        res.send(req.body, req.files);
-    })
+    .post(isLoggedIn,upload.array('image'),validateRoom,catchAsync(rooms.createRoom))
 
 router.get('/new', isLoggedIn ,rooms.renderNewForm);
 

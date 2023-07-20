@@ -14,8 +14,14 @@ module.exports.renderNewForm = (req , res)=>{
 //Create a new room
 module.exports.createRoom = async(req , res , next)=>{
     const room = new Room(req.body.room);
+    room.images = req.files.map(f=>({
+        filename : f.filename, 
+        url : f.path
+    }));
     room.author = req.user._id;
     await room.save();
+
+    console.log(room);
     req.flash('success','Successfully made a new rental house');
     res.redirect(`/rooms/${room._id}`);
 };
