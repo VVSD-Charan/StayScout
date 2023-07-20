@@ -1,33 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
-const {roomSchema} = require('../schemas.js');
-const {isLoggedIn} = require('../middleware');
-const ExpressError = require('../utils/ExpressError'); 
+const {isLoggedIn,isAuthor,validateRoom} = require('../middleware');
 const Room = require('../models/rooms');
-
-const validateRoom = (req , res , next) =>
-{
-    const {error} = roomSchema.validate(req.body);
-
-    if(error){
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg,400);
-    }else{
-        next();
-    }
-};
-
-const isAuthor = async(req , res , next) => {
-    const {id} = req.params;
-    const room = await Room.findById(id);
-
-    if(req.user &&  !room.author.equals(req.user._id)){
-        req.flash('error','Only owners can perform this action!');
-        return res.redirect(`/rooms/${id}`);
-    }
-    next();
-}
 
 //Handling get requests
 router.get('/',catchAsync(async (req , res) => {
