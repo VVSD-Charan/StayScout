@@ -1,4 +1,4 @@
-const {roomSchema} = require('./schemas.js');
+const {roomSchema,reviewSchema} = require('./schemas.js');
 const ExpressError = require('./utils/ExpressError.js');
 const Room = require('./models/rooms.js');
 
@@ -39,4 +39,16 @@ module.exports.isAuthor = async(req , res , next) => {
         return res.redirect(`/rooms/${id}`);
     }
     next();
+}
+
+module.exports.validateReview = (req , res , next) =>
+{
+    const {error}=reviewSchema.validate(req.body);
+
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg,400);
+    }else{
+        next();
+    }
 }
