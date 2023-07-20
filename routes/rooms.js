@@ -4,16 +4,18 @@ const rooms = require('../controllers/rooms');
 const catchAsync = require('../utils/catchAsync');
 const {isLoggedIn,isAuthor,validateRoom} = require('../middleware');
 const Room = require('../models/rooms');
-
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const multer  = require('multer');
+const {storage} = require('../cloudinary');
+const upload = multer({ storage });
 
 router.route('/')
     //Render all rooms
     .get(catchAsync(rooms.index))
     //Create a new room
     // .post(isLoggedIn,validateRoom,catchAsync(rooms.createRoom))
-    .post(upload.array('image'),(req,res)=>{res.send(req.body, req.files)})
+    .post(upload.array('image'),(req,res)=>{
+        res.send(req.body, req.files);
+    })
 
 router.get('/new', isLoggedIn ,rooms.renderNewForm);
 
