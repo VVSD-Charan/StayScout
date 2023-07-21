@@ -60,6 +60,16 @@ module.exports.updateRoom = async(req , res)=>{
     const {title,location,image,price,description} = req.body.room;
 
     await Room.findByIdAndUpdate(id,{title,location,image,description,price},{new:true});
+
+    const imgs = req.files.map(f=>({
+        filename : f.filename, 
+        url : f.path
+    }));
+
+    room.images.push(...imgs);
+
+    await room.save();
+
     req.flash('success','Successfully updated room details!');
     res.redirect(`/rooms/${id}`);
 };

@@ -20,7 +20,7 @@ router.route('/:id')
     //Render room data
     .get(catchAsync(rooms.showRoom))
     //Update room data
-    .put(isLoggedIn, isAuthor , validateRoom ,catchAsync(rooms.updateRoom))
+    .put(isLoggedIn, isAuthor, upload.array('image') , validateRoom ,catchAsync(rooms.updateRoom))
     //Delete the room
     .delete(isLoggedIn,isAuthor ,catchAsync(rooms.deleteRoom))
 
