@@ -20,9 +20,9 @@ module.exports.createRoom = async(req , res , next)=>{
         query : req.body.room.location,
         limit : 1
     }).send()
-    console.log(geoData.body.features);
 
     const room = new Room(req.body.room);
+    room.geometry=geoData.body.features[0].geometry;
     room.images = req.files.map(f=>({
         filename : f.filename, 
         url : f.path
