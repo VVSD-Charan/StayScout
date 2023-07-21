@@ -55,6 +55,7 @@ module.exports.renderEditForm = async (req , res)=>{
 //Update room data
 module.exports.updateRoom = async(req , res)=>{
     const {id}=req.params;
+    console.log(req.body);
     const room = await Room.findById(id);
 
     const {title,location,image,price,description} = req.body.room;
