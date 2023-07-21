@@ -58,12 +58,14 @@
             <!-- Delete images  -->
             <div class="mb-3">
                 <% room.images.forEach(function(img,i){ %>
-                    <img src="<%=img.url%>" class="img-thumbnail" alt="">
+                   <div style="display: block;">
+                        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
 
-                <div class="form-check-inline">
-                    <input type="checkbox" name="deleteImages[]" id="image<%=i%>" value="<%=img.filename%>">
-                </div>
-                <label for="image<%=i%>">Delete image</label>
+                        <div class="form-check-inline">
+                            <input type="checkbox" name="deleteImages[]" id="image<%=i%>" value="<%=img.filename%>">
+                        </div>
+                        <label for="image<%=i%>">Delete</label>
+                   </div>
                 <% }) %>
             </div>
 
