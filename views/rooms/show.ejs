@@ -37,7 +37,7 @@
             </div>
 
             <!-- Room details  -->
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush" style="text-align: right;">
                 <li class="list-group-item text-muted"><%= room.location %></li>
                 <li class="list-group-item text-muted"> Posted by <b><%= room.author.username %></b></li>
                 <li class="list-group-item">₹ <%= room.price %> per month</li>
@@ -102,7 +102,7 @@
 
         <% if(room.reviews.length === 0) { %>
             <div style="text-align: center; margin-bottom: 30px">
-                <h5>No reviews for this room</h5>
+                <h5>No reviews for this room !</h5>
             </div>
         <% } else {%>
             <h2>Reviews for this room : </h2>
