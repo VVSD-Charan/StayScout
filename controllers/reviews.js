@@ -3,8 +3,16 @@ const Room=require('../models/rooms');
 
 //Add a review
 module.exports.createReview = async(req , res) =>{
+
+
     const id = req.params.id;
     const room = await Room.findById(req.params.id);
+
+    if(req.body.review.rating === '0'){
+        req.flash('error','Please provide rating between 1 star to 5 stars');
+        return res.redirect(`/rooms/${room._id}`);
+    }
+
     const review = new Review(req.body.review);
     review.author = req.user._id;
     room.reviews.push(review);
