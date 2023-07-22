@@ -4,6 +4,20 @@
 <div class="row">
     <div class="col-6">
 
+        <!-- Mapbox code to display map  -->
+        
+        <div id='map' style='width: 400px; height: 300px;'></div>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoidnZzZGMiLCJhIjoiY2xrY2h3djB4MG1yejNtcXZhbDFpazI0YyJ9.vMRFDyaqoKWOmxZpAXvvWw';
+            const map = new mapboxgl.Map({
+                container: 'map', // container ID
+                style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                center: [-74.5, 40], // starting position [lng, lat]
+                zoom: 4, // starting zoom
+            });
+        </script>
+        
+
         <!-- Bootstrap Image carousel  -->
         <div id="roomCarousel" class="carousel slide">
             <div class="carousel-inner">
@@ -129,3 +143,13 @@
     </div>
 </div>
 
+
+<script>
+    mapboxgl.accessToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 4, // starting zoom
+    });
+</script>
