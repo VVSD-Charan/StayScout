@@ -9,36 +9,53 @@
     <!-- Bootstrap  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="/stylesheets/home.css">
 </head>
 
 <body>
-    
+
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">StayScout</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav">
-                <a class="nav-link"  href="/">Home</a>
-                <a class="nav-link" href="/rooms">Find Rooms</a>
-                <a class="nav-link" href="/rooms/new">Add Room</a>
+            <a class="navbar-brand" href="/">StayScout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/rooms">Find Rooms</a>
+                    <a class="nav-link" href="/rooms/new">Add Room</a>
+                </div>
+
+                <div class="navbar-nav ml-auto">
+                    <% if(!currentUser) { %>
+                        <a href="/login" class="nav-link">Login</a>
+                        <a href="/register" class="nav-link">Sign up</a>
+                        <% } else { %>
+                            <a href="/logout" class="nav-link">Logout</a>
+                            <% } %>
+                </div>
+
             </div>
-    
-            <div class="navbar-nav ml-auto">
-              <% if(!currentUser) { %>
-                <a href="/login" class="nav-link">Login</a>
-                <a href="/register" class="nav-link">Sign up</a>
-              <% } else { %>
-                <a href="/logout" class="nav-link">Logout</a>
-              <% } %>
-            </div>
-    
-          </div>
         </div>
-      </nav>
+    </nav>
+
+    <main class="px-3 main-class">
+        <h1>StayScout</h1>
+        <p class="lead">Welcome to StayScout! <br> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde
+            excepturi iste rerum sapiente voluptas cum quos ab eligendi repellendus. Ullam ex voluptatum dignissimos
+            quaerat, laborum doloribus. Illo iste recusandae alias!</p>
+
+        <a href="/rooms" class="btn btn-lg btn-secondary font-weight-bold text-white bg-white">View Rooms</a>
+    </main>
+
+    <footer class="mt-auto footer">
+        <p>&copy; 2023 StayScout</p>
+    </footer>
 
     <!-- Bootsrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

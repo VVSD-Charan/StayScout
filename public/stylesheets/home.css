@@ -1,0 +1,17 @@
+.main-class{
+    text-align: center;
+    width: 60%;
+    margin-left : 20%;
+    margin-top: 15%;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 44%;
+}
+
+body{
+    height: 100vh;
+    justify-content: center;
+}
