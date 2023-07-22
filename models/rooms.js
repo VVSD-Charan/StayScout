@@ -12,6 +12,8 @@ ImageSchema.virtual('thumbnail').get(function(){
     return this.url.replace('/upload','/upload/w_220');
 });
 
+const opts = {toJSON : {virtuals : true}};
+
 const roomSchema = new Schema({
     title : String,
     images : [ImageSchema],
@@ -39,6 +41,10 @@ const roomSchema = new Schema({
             ref : 'Review'
         }
     ]
+},opts);
+
+roomSchema.virtual('properties.popUpMarkup').get(function(){
+    return `<strong><a href="/rooms/${this._id}">${this.title}</a></strong>`;
 });
 
 roomSchema.post('findOneAndDelete',async function(doc){
