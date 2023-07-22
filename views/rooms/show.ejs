@@ -4,9 +4,6 @@
 <div class="row">
     <div class="col-6">
 
-        <!--  Display map  -->
-        <div id='map' style='width: 400px; height: 300px;'></div>
-
         <!-- Bootstrap Image carousel  -->
         <div id="roomCarousel" class="carousel slide">
             <div class="carousel-inner">
@@ -63,9 +60,12 @@
     </div>
 
     <div class="col-6">
-        <h2>Leave a review</h2>
+
+        <!--  Display map  -->
+        <div id='map' style='height: 300px; margin-bottom: 40px;'></div>
 
         <% if(currentUser) { %>
+            <h2>Leave a review</h2>
             <!-- Form to add review  -->
             <form action="/rooms/<%=room._id%>/reviews" method="post" class="mb-3 validated-form" novalidate>
 
@@ -98,6 +98,18 @@
                     <button class="btn btn-success">Submit Review</button>
                 </div>
             </form>
+        <% }else { %>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2>Login to review</h2>
+            </div>
+        <% } %>
+
+        <% if(room.reviews.length === 0) { %>
+            <div style="text-align: center; margin-bottom: 30px">
+                <h5>No reviews for this room</h5>
+            </div>
+        <% } else {%>
+            <h2>Reviews for this room : </h2>
         <% } %>
 
         <!-- Iterate reviews array   -->
