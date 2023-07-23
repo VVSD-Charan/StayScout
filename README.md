@@ -26,9 +26,16 @@
 ## Description of packages/libraries used :
 
 #### Cloudinary
+Cloudinary is a cloud-based media management platform that provides developers and businesses with a comprehensive solution for storing, optimizing, and delivering images and videos online. It offers a wide range of features, including image and video uploading, storage, manipulation, and delivery via a global content delivery network (CDN).
+
 #### Passport.JS
+Passport.js is a popular and widely used authentication middleware for Node.js applications. Its main purpose is to simplify the process of implementing user authentication, such as login and registration, in web applications. It is designed to be flexible, modular, and easy to integrate with various authentication strategies.
+
 #### Starability 
+Starability is a developer-friendly open-source repository that simplifies the process of creating responsive star-based ratings. It empowers developers by providing an easy-to-use solution for integrating customizable stars into their projects.
+
 #### Mapbox
+Mapbox is a leading location data platform that provides mapping and navigation services for a wide range of applications. It offers tools and APIs (Application Programming Interfaces) that enable developers to integrate customizable maps, geocoding, routing, and other location-based features into their web and mobile applications. 
 
 ## Glimpse of website : 
 
