@@ -23,6 +23,16 @@
   <li>Use <strong>node app.js</strong> to run project.</li>
 </ul>
 
+### MVC architecture is used in this project
+<ul>
+  <li>It made project scalable which in turn helps in growth of application.</li>
+  <li>Components can be maintained easily.</li>
+  <li>A model can be re-used multiple times.</li>
+  <li>The code will be easy to understand.</li>
+  <li>Each layer is maintained seperately, so fixing bugs became easy.</li>
+  <li>Testing became easy,</li>
+</ul>
+
 ## Description of packages/libraries used :
 
 #### Cloudinary
