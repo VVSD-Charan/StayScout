@@ -1,55 +1,48 @@
 <% layout('layouts/boilerplate') %>
 
-<div id="map" style="width: 100%; height: 500px;"></div>
+    <div id="map" style="width: 100%; height: 500px;"></div>
 
-<div class="mb-3" style="text-align: center; margin-top: 30px;">
-    <h1>All rooms</h1>
-    <a class="btn btn-success" href="/rooms/new" >Add Rooms for rent</a>
-</div>
+    <div class="mb-3" style="text-align: center; margin-top: 30px;">
+        <h1>All rooms</h1>
+        <a class="btn btn-success" href="/rooms/new">Add Rooms for rent</a>
+    </div>
 
 
-<% for (let room of rooms) { %>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <% for (let room of rooms) { %>
 
-    <div class="card mb-3">
-        <div class="row">
-
-            <% if(room.images.length > 0) { %>
-                <div class="col-md-4 mb-3">
-                    <img src="<%= room.images[0].url %>" alt="<%= room.title%>" class="img-fluid">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <% let empty = "https://tse3.mm.bing.net/th?id=OIP.M2WECJFVXPA94wpCfwYjaQHaHa&pid=Api&P=0&h=180" %>
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+                            src="<%= room.images.length > 0 ? room.images[0].url : empty %>" role="img" aria-label="Placeholder: Thumbnail"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                    </img>
+                        <div class="card-body">
+                            <div style="text-align: center;" class="mb-3">
+                                <p class="card-title"  style="font-weight: bold; font-size: 17px;"><%= room.title %></p>
+                                <p class="card-text"><%= room.location %></p>
+                            </div>
+                            <p class="card-text"><%= room.description %></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/rooms/<%= room.id %>" class="btn btn-sm btn-outline-secondary">View room</a>
+                                </div>
+                                <small class="text-body-secondary"><%= room.price %></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <% } else { %>
-                <div class="col-md-4 mb-3">
-                    <img src=" https://tse3.mm.bing.net/th?id=OIP.M2WECJFVXPA94wpCfwYjaQHaHa&pid=Api&P=0&h=180" alt="<%= room.title%>" class="img-fluid">
-                </div>
-            <% } %>
 
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= room.title %>
-                    </h5>
-                    <p class="card-text">
-                        <%= room.description %>
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <%= room.location %>
-                        </small>
-                    </p>
-                    <a href="/rooms/<%= room.id %>" class="btn btn-primary">
-                        View <%= room.title %>
-                    </a>
-                </div>
-            </div>
+
+                <% } %>
         </div>
     </div>
-        
-<% } %>
 
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-    const rooms = {features : <%-JSON.stringify(rooms)%>}
+    const rooms = { features: <%-JSON.stringify(rooms) %>}
 </script>
 
 <script src="/javascripts/clusterMaps.js"></script>
-
