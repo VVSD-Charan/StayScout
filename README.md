@@ -12,6 +12,26 @@
   <li>Passport.JS</li>
 </ul>
 
+## Steps to run project
+<ul>
+  <li>Create an account in cloudinary and mapbox.</li>
+  <li>Install dotenv npm package using command <strong>npm install dotenv</strong> and create a .env file in project folder.</li>
+  <li>Fill values of CLOUDINARY_CLOUD_NAME , CLOUDINARY_KEY , CLOUDINARY_SECRET in the env file from your cloudinary account.</li>
+  <li>Fill value of MAPBOX_TOKEN with value provided to you in your mapbox account.</li>
+  <li>Use <strong>npm install</strong> to install all packages.</li>
+  <li>Make sure that MongoDB is installed in your system.</li>
+  <li>Use <strong>node app.js</strong> to run project.</li>
+</ul>
+
+## Description of packages/libraries used :
+
+#### Cloudinary
+#### Passport.JS
+#### Starability 
+#### Mapbox
+
+## Glimpses of website : 
+
 ### Home page : 
 ![Screenshot (1)](https://github.com/VVSD-Charan/StayScout/assets/105978561/9cd5f556-5a13-499e-8f48-c50746a27703)
 
