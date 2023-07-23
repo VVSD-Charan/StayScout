@@ -30,7 +30,7 @@
 #### Starability 
 #### Mapbox
 
-## Glimpses of website : 
+## Glimpse of website : 
 
 ### Home page : 
 ![Screenshot (1)](https://github.com/VVSD-Charan/StayScout/assets/105978561/9cd5f556-5a13-499e-8f48-c50746a27703)
