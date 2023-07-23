@@ -24,12 +24,12 @@
                                 <p class="card-title"  style="font-weight: bold; font-size: 17px;"><%= room.title %></p>
                                 <p class="card-text"><%= room.location %></p>
                             </div>
-                            <p class="card-text"><%= room.description %></p>
+                            <p class="card-text"><%= room.description.length>150 ? room.description.substring(0,150)+' ...' : room.description %></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="/rooms/<%= room.id %>" class="btn btn-sm btn-outline-secondary">View room</a>
+                                    <a href="/rooms/<%= room.id %>" class="btn btn-sm btn-outline-success">View room</a>
                                 </div>
-                                <small class="text-body-secondary"><%= room.price %></small>
+                                <small class="text-body-secondary">₹<%= room.price %>/month</small>
                             </div>
                         </div>
                     </div>
