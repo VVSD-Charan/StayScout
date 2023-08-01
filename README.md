@@ -2,6 +2,8 @@
 
 ## StayScout is an innovative and user-friendly application designed to simplify the process of finding and adding rental rooms. With its intuitive cluster map feature, users can effortlessly discover available rental rooms in their desired locations. The app showcases rental rooms as pins on the map, allowing users to easily identify and explore options nearby.
 
+Click <a href="https://docs.google.com/presentation/d/12CrwGq5DOTmJ4kgtXXTqHsr0V05lSeM2/edit?usp=sharing&ouid=100759929152238592141&rtpof=true&sd=true">here</a> for detailed description about technologies and packages used in this project.
+
 ### Technologies Used : 
 <ul>
   <li>Bootstrap</li>
