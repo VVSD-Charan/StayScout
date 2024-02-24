@@ -1,10 +1,14 @@
 <% layout('layouts/boilerplate') %>
 
     <style>
-         .border-animation {
+        .content{
+            background: #201658;
+        }
+
+        .border-animation {
         width: 170px;
         height: 50px;
-        box-shadow: 6px 4px 5px lightgray;
+        box-shadow: 6px 4px 5px #201658;
         margin-left: auto;
         margin-right: auto;
         border-radius: 10px;
@@ -27,6 +31,15 @@
         border-radius: 50%;
         z-index: -1;
     }
+
+    .card-content
+    {
+        background-color: #201658; 
+        color: white; 
+        border: 2px solid #EE4266; 
+        margin-bottom: 25px;
+    }
+
     .border-animation::after {
         content: "All Rooms";
         width: 165px;
@@ -53,16 +66,16 @@
 
     <div class="mb-3" style="text-align: center; margin-top: 30px;">
         <div class="border-animation"></div>
-        <a class="btn btn-success" href="/rooms/new">Add Rooms for rent</a>
+        <a class="btn btn-success" style="margin-bottom: 30px;" href="/rooms/new">Add Rooms for rent</a>
     </div>
 
 
-    <div class="container">
+    <div class="container content">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <% for (let room of rooms) { %>
 
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm card-content">
                         <% let empty = "https://tse3.mm.bing.net/th?id=OIP.M2WECJFVXPA94wpCfwYjaQHaHa&pid=Api&P=0&h=180" %>
                         <img class="bd-placeholder-img card-img-top" width="100%" height="225"
                             src="<%= room.images.length > 0 ? room.images[0].url : empty %>" role="img" aria-label="Placeholder: Thumbnail"
@@ -70,15 +83,15 @@
                     </img>
                         <div class="card-body">
                             <div style="text-align: center;" class="mb-3">
-                                <p class="card-title"  style="font-weight: bold; font-size: 21px; text-transform: uppercase; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><%= room.title %></p>
-                                <p class="card-text" style="border-bottom: 1.5px solid lightgrey; padding-bottom: 7px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><%= room.location %></p>
+                                <p class="card-title"  style="font-weight: bold; font-size: 21px; text-transform: uppercase; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: #FBA834;"><%= room.title %></p>
+                                <p class="card-text" style="border-bottom: 1.5px solid lightgrey; padding-bottom: 7px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: #FBA834;"><%= room.location %></p>
                             </div>
                             <p class="card-text" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><%= room.description.length>150 ? room.description.substring(0,150)+' ...' : room.description %></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="/rooms/<%= room.id %>" class="btn btn-sm btn-outline-success">View room -></a>
+                                    <a href="/rooms/<%= room.id %>" class="btn btn-sm btn-success">View room -></a>
                                 </div>
-                                <small class="text-body-secondary"><span style="font-size: 17px;">₹<%= room.price %></span>/<span style="border-bottom: 1px solid red; font-family: cursive;">month</span></small>
+                                <small class="text-body-secondary" ><span style="font-size: 17px; color: white;">₹<%= room.price %></span><span style="border-bottom: 1px solid yellow; font-family: cursive; color: white;"> / month</span></small>
                             </div>
                         </div>
                     </div>
