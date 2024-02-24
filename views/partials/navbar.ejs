@@ -1,26 +1,66 @@
+<style>
+  .web-title{
+    font: 700 1.3em/1 "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .5em;
+    letter-spacing: 0;
+    display: block;
+    margin-right: 20px;
+    text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+    background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+  }
+
+  .nav-link{
+    color: white;
+    margin: 0 15px;
+  }
+
+  .nav-link:hover{
+    border: 1px solid orange;
+    transition: 0.25s ease-in-out;
+  }
+
+  @-webkit-keyframes aitf {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+</style>
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: black;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">StayScout</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="container-fluid">
+    <a class="navbar-brand web-title" href="/">StayScout</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <div class="navbar-nav">
-            <a class="nav-link"  href="/">Home</a>
-            <a class="nav-link" href="/rooms">Find Rooms</a>
-            <a class="nav-link" href="/rooms/new">Add Room</a>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/rooms">Find Rooms</a>
+        <a class="nav-link" href="/rooms/new">Add Room</a>
+      </div>
 
-        <div class="navbar-nav ml-auto">
-          <% if(!currentUser) { %>
-            <a href="/login" class="nav-link">Login</a>
-            <a href="/register" class="nav-link">Sign up</a>
+      <div class="navbar-nav ml-auto">
+        <% if(!currentUser) { %>
+          <a href="/login" class="nav-link">Login</a>
+          <a href="/register" class="nav-link">Sign up</a>
           <% } else { %>
             <a href="/logout" class="nav-link">Logout</a>
-          <% } %>
-        </div>
-
+            <% } %>
       </div>
+
     </div>
-  </nav>
+  </div>
+</nav>

@@ -1,7 +1,34 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/stars.css">
 
-<div class="row">
+<style>
+    .list-group-item{
+        background-color: black;
+        border: none;
+        color: white;
+    }
+    .room-title{
+        color: goldenrod;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 22px;
+        text-align: center;
+    }
+    .room-description{
+        color: white;
+        font-size: 15px;
+        text-align: center;
+    }
+    .card-body{
+        background-color: black;
+    }
+    .display-info{
+        text-align: center; 
+        margin-bottom: 30px;
+        color: white;
+    }
+</style>
+
+<div class="row" >
     <div class="col-6">
 
         <!-- Bootstrap Image carousel  -->
@@ -30,25 +57,25 @@
         <div class="card mb-3">
             <!-- Room name and description  -->
             <div class="card-body">
-                <div style="text-align: center;">
-                    <h5 class="card-title"><%= room.title %> </h5>
+                <div>
+                    <h5 class="card-title room-title"><%= room.title %> </h5>
                 </div>
-                <p class="card-text"><%= room.description %></p>
+                <p class="card-text room-description"><%= room.description %></p>
             </div>
 
             <!-- Room details  -->
             <ul class="list-group list-group-flush" style="text-align: right;">
-                <li class="list-group-item text-muted"><%= room.location %></li>
-                <li class="list-group-item text-muted"> Posted by <b><%= room.author.username %></b></li>
+                <li class="list-group-item"><%= room.location %></li>
+                <li class="list-group-item"> Posted by <b><%= room.author.username %></b></li>
                 <li class="list-group-item">₹ <%= room.price %> per month</li>
             </ul>
 
             <!-- Update and delete room buttons (only for owner of room) -->
             <% if(currentUser && room.author.equals(currentUser._id)) { %>
-                <div class="card-body">
-                    <a href="/rooms/<%=room._id%>/edit" class="card-link btn btn-info">Edit Room</a>
+                <div class="card-body" style="background-color: black;">
+                    <a href="/rooms/<%=room._id%>/edit" class="card-link btn btn-outline-info">Edit Room</a>
                     <form class="d-inline" action="/rooms/<%= room._id %>?_method=DELETE" method="post">
-                        <button class="btn btn-danger">Delete Room</button>
+                        <button class="btn btn-outline-danger">Delete Room</button>
                     </form>
                 </div>
             <% } %>
@@ -95,13 +122,13 @@
                 </div>
             </form>
         <% }else { %>
-            <div style="text-align: center; margin-bottom: 20px;">
+            <div class="display-info">
                 <h2>Login to review</h2>
             </div>
         <% } %>
 
         <% if(room.reviews.length === 0) { %>
-            <div style="text-align: center; margin-bottom: 30px">
+            <div class="display-info">
                 <h5>No reviews for this room !</h5>
             </div>
         <% } else {%>
