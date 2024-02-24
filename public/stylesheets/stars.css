@@ -195,8 +195,8 @@
   
   .nav-link:hover
   {
-      letter-spacing: 2px;
-      border: 1px solid orange;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid orange;
       transition: .4s ease-in-out;
   }
   
