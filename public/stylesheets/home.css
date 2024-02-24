@@ -2,7 +2,7 @@
     text-align: center;
     width: 60%;
     margin-left : 20%;
-    margin-top: 13%;
+    margin-top: 11%;
 }
 
 .footer{
@@ -29,3 +29,50 @@ body{
 .nav-link:hover{
     border-bottom-color: orange ;
 }
+
+.text {
+    font-size: 5rem;
+    letter-spacing: 3px;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    animation: typing 7s infinite, cursor 1s step-end infinite alternate;
+}
+
+@keyframes cursor {
+    50% {border-color: transparent}
+}
+
+@keyframes typing {
+    from {width: 0}
+}
+
+.animated-button{
+    position: relative;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    background: white;
+    text-decoration: none;
+    color: black;
+}
+
+.animated-button:hover
+{
+    letter-spacing: 4px;
+    background: var(--clr);
+    color: black;
+    box-shadow: 0 0 35px var(--clr);
+}
+
+.lead{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 18px;
+}
+
+
+

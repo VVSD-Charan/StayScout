@@ -187,3 +187,16 @@
       display: none;
     }
   }
+
+  .nav-link
+  {
+      text-align: center;
+  }
+  
+  .nav-link:hover
+  {
+      letter-spacing: 2px;
+      border: 1px solid orange;
+      transition: .4s ease-in-out;
+  }
+  
