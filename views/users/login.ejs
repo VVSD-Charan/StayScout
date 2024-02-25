@@ -1,12 +1,24 @@
 <% layout('layouts/boilerplate') %>
 
+<style>
+    .btn{
+        background-color: black;
+        border: 0.5px solid white;
+        color: white;
+        padding: 5px 15px;
+    }
+    .btn:hover{
+        background-color: goldenrod;
+        transition: 0.5s ease-in-out;
+    }
+</style>
+
 <div style="text-align: center;">
-    <h1>Login</h1>
+    <h1 style="color: white;">Login</h1>
 </div>
 
-<div style="width: 50%; margin-left: 25%;">
+<div style="width: 50%; margin-left: 25%; color: white;">
     <form action="/login" method="post" class="validated-form" novalidate>
-
         <div class="mb-3">
             <label for="username" class="form-label">
                 User name
@@ -28,7 +40,7 @@
         </div>
     
        <div style="text-align: right;">
-        <button class="btn btn-success">Login</button>
+        <button class="btn">Login</button>
        </div>
     
     </form>
