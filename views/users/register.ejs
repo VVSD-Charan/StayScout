@@ -1,44 +1,84 @@
 <% layout('layouts/boilerplate') %>
 
+<style>
+    .btn{
+        color: white;
+        padding: 5px 15px;
+        margin-top: 20px;
+    }
+    .inputBox{
+        position: relative;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .inputBox input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid white;
+        background:black;
+        border-radius: 5px;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        transition: 0.5s;
+    }
+    .inputBox span{
+        position: absolute;
+        left: 0;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 1em;
+        color: rgba(255,255,255,0.35);
+        text-transform: uppercase;
+        transition: 0.5s;
+    }
+    .inputBox input:valid ~ span,.inputBox input:focus ~ span{
+        color: white;
+        transform: translateX(10px) translateY(-7px);
+        font-size: 0.65em;
+        padding: 0 10px;
+        background: black;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        letter-spacing: 0.2em;
+    }
+    .inputBox input:valid,.inputBox input:focus{
+        border: 1px solid white;
+    }
+</style>
+
 <div style="text-align: center;">
-    <h2>Register</h2>
+    <h2 style="color: white;">Register</h2>
 </div>
 
 <div style="width: 60%; margin-left: 20%;">
     <form action="/register" method="post" class="validated-form" novalidate>
-
-        <div class="mb-3">
-            <label for="username" class="form-label">
-                User name
-            </label>
-            <input type="text" class="form-control" id="username" name="username" required>
+        <div class="inputBox">
+            <input type="text" name="username" id="username" required>
+            <span>User Name</span>
             <div class="invalid-feedback">
                 User name is required!
             </div>
         </div>
-    
-        <div class="mb-3">
-            <label for="email" class="form-label">
-                Email 
-            </label>
-            <input type="email" class="form-control" id="email" name="email" required>
+
+        <div class="inputBox">
+            <input type="email" name="email" id="email" required>
+            <span>Email</span>
             <div class="invalid-feedback">
-                Email is a required field
+                Email is required!
             </div>
         </div>
-    
-        <div class="mb-3">
-            <label for="password" class="form-label">
-                Password 
-            </label>
-            <input type="password" class="form-control" id="password" name="password" required>
+
+        <div class="inputBox">
+            <input type="password" name="password" id="password" required>
+            <span>Password</span>
             <div class="invalid-feedback">
-               Password is required!
+                Password is required!
             </div>
         </div>
     
        <div style="text-align: right;">
-        <button class="btn btn-success">Register</button>
+        <button class="btn btn-outline-success">Register</button>
        </div>
     
     </form>

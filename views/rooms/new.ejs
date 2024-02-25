@@ -1,5 +1,52 @@
 <% layout('layouts/boilerplate') %>
 
+<style>
+    .btn{
+        color: white;
+        padding: 5px 15px;
+        margin-top: 20px;
+    }
+    .inputBox{
+        position: relative;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .inputBox input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid white;
+        background:black;
+        border-radius: 5px;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        transition: 0.5s;
+    }
+    .inputBox span{
+        position: absolute;
+        left: 0;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 1em;
+        color: rgba(255,255,255,0.35);
+        text-transform: uppercase;
+        transition: 0.5s;
+    }
+    .inputBox input:valid ~ span,.inputBox input:focus ~ span{
+        color: white;
+        transform: translateX(10px) translateY(-7px);
+        font-size: 0.65em;
+        padding: 0 10px;
+        background: black;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        letter-spacing: 0.2em;
+    }
+    .inputBox input:valid,.inputBox input:focus{
+        border: 1px solid white;
+    }
+</style>
+
 <!-- Form to add new room  -->
 <div class="row">
     <h1 class="text-center">
@@ -7,57 +54,54 @@
     </h1>
     <div class="col-6 offset-3">
         <form action="/rooms" method="post" novalidate class="validated-form" enctype="multipart/form-data">
-
             <!-- Room title  -->
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="room[title]" required>
+            <div class="inputBox">
+                <input type="text" name="room[title]" id="title" required>
+                <span>Room Name / Title</span>
                 <div class="invalid-feedback">
-                    Title is a required field
+                    Title is required!
                 </div>
             </div>
 
             <!-- Add room location  -->
-            <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="room[location]" required>
+            <div class="inputBox">
+                <input type="text" name="room[location]" id="location" required>
+                <span>Room Location</span>
                 <div class="invalid-feedback">
-                    Location is  required.
+                    Room Location is required!
                 </div>
             </div>
 
             <!-- Add room images  -->
-            <div class="mb-3">
-                <label for="image" class="form-label">Upload Images</label>
-                <input class="form-control" type="file" id="image" multiple name="image">
+            <div class="inputBox">
+                <input type="file" name="image" multiple id="image" required>
+                <span>Room Images</span>
+                <div class="invalid-feedback">
+                    Images of room are required!
+                </div>
             </div>
 
             <!-- Room price  -->
-            <div class="mb-3">
-                <label for="price" class="form-label">Room Rent</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="price-label">
-                        ₹
-                    </span>
-                    <input type="text" id="price" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="room[price]" required>
-                    <div class="invalid-feedback">
-                        Please provide price in Indian rupees.
-                    </div>
+            <div class="inputBox">
+                <input type="text" name="room[price]" id="price" required>
+                <span>Room price</span>
+                <div class="invalid-feedback">
+                    Please provide price of the room in Indian Rupees/month.
                 </div>
             </div>
 
             <!-- Room description  -->
-            <div class="mb-3">
-                <label class="form-label" for="description">Room Description</label>
-                <textarea class="form-control" type="text" id="description" name="room[description]" required></textarea>
+            <div class="inputBox">
+                <input type="text" name="room[description]" id="description" required>
+                <span>Describe about the room</span>
                 <div class="invalid-feedback">
-                    Please provide description about room!
+                    Please provide description for the room.
                 </div>
             </div>
 
             <!-- Add room button  -->
             <div class="mb-3" style="text-align: right;">
-                <button class="btn btn-success">Add Tolet Room</button>
+                <button class="btn btn-outline-success">Add Tolet Room</button>
             </div>
         </form>
 
