@@ -14,6 +14,49 @@
     <link rel="stylesheet" href="/stylesheets/home.css">
 </head>
 
+<style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .footer .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .animate-charcter {
+        background-image: linear-gradient(-225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #fff800 100%);
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 2s linear infinite;
+        display: inline-block;
+        font-size: 15px;
+        padding-bottom: 10px;
+    }
+
+    @keyframes textclip {
+        to {
+            background-position: 200% center;
+        }
+    }
+</style>
+
+
 <body>
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
@@ -46,13 +89,21 @@
 
     <main class="px-3 main-class" style="color: white;">
         <h1 class="text">StayScout</h1>
-        <p class="lead">Discover and list rental rooms effortlessly. Your one-stop platform for exploring diverse accommodations and easily adding your rooms for rent. Simplify your search or rental process today!</p>
+        <p class="lead">Discover and list rental rooms effortlessly. Your one-stop platform for exploring diverse
+            accommodations and easily adding your rooms for rent. Simplify your search or rental process today!</p>
 
-        <a href="/rooms" class="btn btn-lg btn-secondary font-weight-bold animated-button" style="--clr:#1e9bff" >View Rooms</a>
+        <a href="/rooms" class="btn btn-lg btn-secondary font-weight-bold animated-button" style="--clr:#1e9bff">View
+            Rooms</a>
     </main>
 
-    <footer class="mt-auto footer">
-        <p>&copy; 2023 StayScout</p>
+    <footer class="footer py-3 mt-auto">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h3 class="animate-charcter">&copy; StayScout @vvsdc 2023</h3>
+              </div>
+            </div>
+          </div>
     </footer>
 
     <!-- Bootsrap JS -->
