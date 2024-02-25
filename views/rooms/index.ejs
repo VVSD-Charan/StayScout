@@ -1,117 +1,8 @@
 <% layout('layouts/boilerplate') %>
 
-    <style>
-        .content{
-            background: black;
-        }
-
-        .border-animation {
-        width: 170px;
-        height: 50px;
-        box-shadow: 6px 4px 5px black;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 10px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .border-animation::before {
-        content: "";
-        background-image: conic-gradient(white 0deg, white 90deg, transparent 90deg, transparent 180deg);
-        width: 300%;
-        height: 300%;
-        position: absolute;
-        top: -100%;
-        left: -100%;
-        animation: rotate 2s linear infinite;
-        border-radius: 50%;
-        z-index: -1;
-    }
-
-    .card-content
-    {
-        background-color: black; 
-        color: white; 
-        border: 2px solid #ffffff; 
-        margin-bottom: 25px;
-    }
-
-    .border-animation::after {
-        content: "All Rooms";
-        width: 165px;
-        height: 45px;
-        background: #ffffff;
-        position: relative;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        font-size: larger;
-        letter-spacing: 3px;
-        z-index: 1;
-    }
-    .room-title{
-        font-weight: 500; 
-        font-size: 19px; 
-        text-transform: uppercase; 
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-        color: #FBA834;
-    }
-    .room-location{
-        border-bottom: 1.5px solid lightgrey; 
-        padding-bottom: 7px; 
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-        color: #fff;
-    }
-
-    .room-description{
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        font-size: 13px; 
-        margin-bottom: 30px;
-    }
-
-    .view-room{
-        background-color: black; 
-        border: 0.2px solid white; 
-        color: white; 
-        font-weight: 600;
-    }
-
-    .view-room:hover{
-        background-color: #FBA834;
-        padding: 7px;
-        transition: 0.5s ease-in-out;
-        border: none;
-    }
-
-    .room-price{
-        font-size: 17px; 
-        color: white;
-    }
-
-    .month-display{
-        border-bottom: 1px solid yellow; 
-        font-family: cursive; 
-        color: white;
-    }
-
-    @media only screen and (max-width : 600px) {
-        .room-price{
-            font-size: 14px;
-        }
-    }
-
-    @keyframes rotate {
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    </style>
+<head>
+    <link rel="stylesheet" href="/stylesheets/rooms.css">
+</head>
 
     <div id="map" style="width: 100%; height: 500px;"></div>
 
@@ -120,6 +11,13 @@
         <a class="btn" style="margin-bottom: 30px; background-color: black; color: white; border: 0.5px solid white; font-weight: 600;" href="/rooms/new">Add Rooms for rent</a>
     </div>
 
+    <div class="search-box">
+        <div class="search-row">
+            <input type="text" id="input-box" placeholder="Search for Locations we serve" autocomplete="off">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="result-box"></div>
+    </div>
 
     <div class="container content">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
@@ -159,3 +57,51 @@
 </script>
 
 <script src="/javascripts/clusterMaps.js"></script>
+
+<script>
+    let availableKeyWords = [];
+
+    for(let i = 0 ; i < rooms.features.length ; i++)
+    {
+        availableKeyWords.push(rooms.features[i].location)
+    }
+
+    console.log(availableKeyWords)
+
+    const resultsBox = document.querySelector(".result-box");
+    const inputBox = document.getElementById("input-box");
+
+    inputBox.onkeyup = function(){
+        let result = [];
+        let input = inputBox.value;
+
+        if(input.length)
+        {
+            result = availableKeyWords.filter((keyword)=>{
+               return keyword.toLowerCase().includes(input.toLowerCase());
+            });
+            console.log(result)
+        }
+        display(result);
+
+        if(!result.length)
+        {
+            resultsBox.innerHTML = '';
+        }
+    }
+
+    function display(result)
+    {
+        const content = result.map((list)=>{
+            return '<li onclick=selectInput(this)>' + list + '</li>'
+        });
+
+        resultsBox.innerHTML = "<ul>"+ content.join('') +"</ul>";
+    }
+
+    function selectInput(list)
+    {
+        inputBox.value = list.innerHTML
+        resultsBox.innerHTML = '';
+    }
+</script>

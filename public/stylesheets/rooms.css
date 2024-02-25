@@ -1,0 +1,166 @@
+/* Search box styling  */
+.search-box{
+    width: 60%;
+    margin: 25px auto;
+    border-radius: 5px;
+}
+.search-row{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+.search-row input{
+    flex: 1;
+    height: 50px;
+    background: transparent;
+    border: .5px solid white;
+    outline: none;
+    font-size: 18px;
+    color: white;
+    padding: 20px 10px;
+}
+button{
+    background: transparent;
+    border: 1px solid white;
+    outline: 0;
+    padding: 11.5px;
+}
+button .fa-solid{
+    width: 25px;
+    color: #555;
+    font-size: 22px;
+    cursor: pointer;
+}
+::placeholder{
+    color: rgba(255,255,255,0.2);
+}
+.result-box{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+.result-box ul{
+    border-top: 1px solid #999;
+    padding: 15px 10px;
+    color: white;
+}
+.result-box ul li{
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+.result-box ul li:hover{
+    background-color: #e9f3ff;
+}
+
+/* Card styling  */
+.content{
+    background: black;
+}
+
+.border-animation {
+width: 170px;
+height: 50px;
+box-shadow: 6px 4px 5px black;
+margin-left: auto;
+margin-right: auto;
+border-radius: 10px;
+position: relative;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 20px;
+}
+.border-animation::before {
+content: "";
+background-image: conic-gradient(white 0deg, white 90deg, transparent 90deg, transparent 180deg);
+width: 300%;
+height: 300%;
+position: absolute;
+top: -100%;
+left: -100%;
+animation: rotate 2s linear infinite;
+border-radius: 50%;
+z-index: -1;
+}
+
+.card-content
+{
+background-color: black; 
+color: white; 
+border: 2px solid #ffffff; 
+margin-bottom: 25px;
+}
+
+.border-animation::after {
+content: "All Rooms";
+width: 165px;
+height: 45px;
+background: #ffffff;
+position: relative;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: black;
+font-size: larger;
+letter-spacing: 3px;
+z-index: 1;
+}
+.room-title{
+font-weight: 500; 
+font-size: 19px; 
+text-transform: uppercase; 
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+color: #FBA834;
+}
+.room-location{
+border-bottom: 1.5px solid lightgrey; 
+padding-bottom: 7px; 
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+color: #fff;
+}
+
+.room-description{
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+font-size: 13px; 
+margin-bottom: 30px;
+}
+
+.view-room{
+background-color: black; 
+border: 0.2px solid white; 
+color: white; 
+font-weight: 600;
+}
+
+.view-room:hover{
+background-color: #FBA834;
+padding: 7px;
+transition: 0.5s ease-in-out;
+border: none;
+}
+
+.room-price{
+font-size: 17px; 
+color: white;
+}
+
+.month-display{
+border-bottom: 1px solid yellow; 
+font-family: cursive; 
+color: white;
+}
+
+@media only screen and (max-width : 600px) {
+.room-price{
+    font-size: 14px;
+}
+}
+
+@keyframes rotate {
+100% {
+    transform: rotate(360deg);
+}
+}
