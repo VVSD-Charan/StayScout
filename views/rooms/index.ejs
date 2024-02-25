@@ -11,14 +11,6 @@
         <a class="btn" style="margin-bottom: 30px; background-color: black; color: white; border: 0.5px solid white; font-weight: 600;" href="/rooms/new">Add Rooms for rent</a>
     </div>
 
-    <div class="search-box">
-        <div class="search-row">
-            <input type="text" id="input-box" placeholder="Search for Locations we serve" autocomplete="off">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-        <div class="result-box"></div>
-    </div>
-
     <div class="container content">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
             <% for (let room of rooms) { %>
@@ -49,6 +41,14 @@
 
                 <% } %>
         </div>
+    </div>
+
+    <div class="search-box">
+        <div class="search-row">
+            <input type="text" id="input-box" placeholder="Search for Locations we serve" autocomplete="off">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="result-box"></div>
     </div>
 
 <script>
