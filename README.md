@@ -15,6 +15,34 @@
   <li>Bootstrap and CSS</li>
 </ul>
 
+### Functional Requirements and Use cases
+
+##### Authentication Requirements
+<ul>
+  <li>A user cannot add rooms without authentication.</li>
+  <li>A user cannot add review for a room without authentication.</li>
+  <li>Username and email used while signing up must be unique.</li>
+</ul>
+
+#### Search Functionality
+<ul>
+  <li>Users can utilize search box to search for rooms by location.</li>
+  <li>Users can access rooms from the map by clicking the plotted points.</li>
+</ul>
+
+#### Room Management
+<ul>
+  <li>Owners can add rooms only after authentication.</li>
+  <li>Only Owners will be able to update and delete the rooms they have posted.</li>
+  <li>Owners can add multiple room images while adding rooms.</li>
+</ul>
+
+#### Rating and Comments
+<ul>
+  <li>Users can give rating on a scale of 5 and add comments for rooms after authentication.</li>
+  <li>Users can only update or delete their reviews.</li>
+</ul>
+
 ### Some glimpses of website
 
 #### Home page
