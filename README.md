@@ -15,18 +15,35 @@
   <li>Bootstrap and CSS</li>
 </ul>
 
+### Some glimpses of website
+
+#### Home page
+
 ![Screenshot (192)](https://github.com/VVSD-Charan/StayScout/assets/105978561/4d0fbf95-83b9-409a-8e0f-39016b8af4c0)
+
+### Find Rooms page
+
+#### Overall map with room locations plotted
 
 ![Screenshot (193)](https://github.com/VVSD-Charan/StayScout/assets/105978561/fc6d7771-7f69-4cf7-ba2e-21c6325f6871)
 
+#### Displaying all avialable rooms
+
 ![Screenshot (194)](https://github.com/VVSD-Charan/StayScout/assets/105978561/e05482fa-2852-4583-bb99-a2385c6c5765)
+
+#### Displaying location search reults
 
 ![Screenshot (195)](https://github.com/VVSD-Charan/StayScout/assets/105978561/aee11d81-1e31-4975-9c4e-7124c89f26b6)
 
+#### Displaying room without authentication
 
 ![Screenshot (196)](https://github.com/VVSD-Charan/StayScout/assets/105978561/468c2d4a-fec7-4775-8632-75bf8df33080)
 
+#### Page to add room for rent
+
 ![Screenshot (197)](https://github.com/VVSD-Charan/StayScout/assets/105978561/d4697578-900b-4471-9fa5-2df4fe287874)
+
+#### Displaying room after authentication
 
 ![Screenshot (198)](https://github.com/VVSD-Charan/StayScout/assets/105978561/87982a26-319b-4a16-8731-e1528028ce05)
 
