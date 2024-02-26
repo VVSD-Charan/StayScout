@@ -1,67 +1,33 @@
 # StayScout
 
-## StayScout is an innovative and user-friendly application designed to simplify the process of finding and adding rental rooms. With its intuitive cluster map feature, users can effortlessly discover available rental rooms in their desired locations. The app showcases rental rooms as pins on the map, allowing users to easily identify and explore options nearby.
+### StayScout is a website where people can easily find rooms to rent in the area they want. It has a map where you can see where the rooms are located, and you can click on the map to find rooms in specific places. There's also a search box where you can type in a location to find rooms there. If you're a landlord, you can log in and add your rooms for rent. And if you're someone looking for a room, you can rate and leave comments about the rooms you've visited.
 
-Click <a href="https://docs.google.com/presentation/d/12CrwGq5DOTmJ4kgtXXTqHsr0V05lSeM2/edit?usp=sharing&ouid=100759929152238592141&rtpof=true&sd=true">here</a> for detailed description about technologies and packages used in this project.
-
-### Technologies Used : 
+### Technologies and packages used in project :
 <ul>
-  <li>Bootstrap</li>
-  <li>Express.JS</li>
+  <li>MapBox (For including maps , adding location pins where rooms are available).</li>
+  <li>Flash (To display messages like success of failed in cases like authentication)</li>
+  <li>Passport.JS (An authentication middleware compatible with Node.JS)</li>
+  <li>Embedded JavaScript (EJS)</li>
+  <li>JavaScript (Concepts like DOM to implement search box and many other events)</li>
   <li>Node.JS</li>
-  <li>MapBox</li>
-  <li>Cloudinary</li>
-  <li>Passport.JS</li>
+  <li>Express.JS</li>
+  <li>MongoDB</li>
+  <li>Bootstrap and CSS</li>
 </ul>
 
-## Steps to run project
-<ul>
-  <li>Create an account in cloudinary and mapbox.</li>
-  <li>Install dotenv npm package using command <strong>npm install dotenv</strong> and create a .env file in project folder.</li>
-  <li>Fill values of CLOUDINARY_CLOUD_NAME , CLOUDINARY_KEY , CLOUDINARY_SECRET in the env file from your cloudinary account.</li>
-  <li>Fill value of MAPBOX_TOKEN with value provided to you in your mapbox account.</li>
-  <li>Use <strong>npm install</strong> to install all packages.</li>
-  <li>Make sure that MongoDB is installed in your system.</li>
-  <li>Use <strong>node app.js</strong> to run project.</li>
-</ul>
+![Screenshot (192)](https://github.com/VVSD-Charan/StayScout/assets/105978561/4d0fbf95-83b9-409a-8e0f-39016b8af4c0)
 
-### MVC architecture is used in this project
-<ul>
-  <li>It made project scalable which in turn helps in growth of application.</li>
-  <li>Components can be maintained easily.</li>
-  <li>A model can be re-used multiple times.</li>
-  <li>The code will be easy to understand.</li>
-  <li>Each layer is maintained seperately, so fixing bugs became easy.</li>
-  <li>Testing became easy,</li>
-</ul>
+![Screenshot (193)](https://github.com/VVSD-Charan/StayScout/assets/105978561/fc6d7771-7f69-4cf7-ba2e-21c6325f6871)
 
-## Description of packages/libraries used :
+![Screenshot (194)](https://github.com/VVSD-Charan/StayScout/assets/105978561/e05482fa-2852-4583-bb99-a2385c6c5765)
 
-#### Cloudinary
-Cloudinary is a cloud-based media management platform that provides developers and businesses with a comprehensive solution for storing, optimizing, and delivering images and videos online. It offers a wide range of features, including image and video uploading, storage, manipulation, and delivery via a global content delivery network (CDN).
+![Screenshot (195)](https://github.com/VVSD-Charan/StayScout/assets/105978561/aee11d81-1e31-4975-9c4e-7124c89f26b6)
 
-#### Passport.JS
-Passport.js is a popular and widely used authentication middleware for Node.js applications. Its main purpose is to simplify the process of implementing user authentication, such as login and registration, in web applications. It is designed to be flexible, modular, and easy to integrate with various authentication strategies.
 
-#### Starability 
-Starability is a developer-friendly open-source repository that simplifies the process of creating responsive star-based ratings. It empowers developers by providing an easy-to-use solution for integrating customizable stars into their projects.
+![Screenshot (196)](https://github.com/VVSD-Charan/StayScout/assets/105978561/468c2d4a-fec7-4775-8632-75bf8df33080)
 
-#### Mapbox
-Mapbox is a leading location data platform that provides mapping and navigation services for a wide range of applications. It offers tools and APIs (Application Programming Interfaces) that enable developers to integrate customizable maps, geocoding, routing, and other location-based features into their web and mobile applications. 
+![Screenshot (197)](https://github.com/VVSD-Charan/StayScout/assets/105978561/d4697578-900b-4471-9fa5-2df4fe287874)
 
-## Glimpse of website : 
+![Screenshot (198)](https://github.com/VVSD-Charan/StayScout/assets/105978561/87982a26-319b-4a16-8731-e1528028ce05)
 
-### Home page : 
-![Screenshot (1)](https://github.com/VVSD-Charan/StayScout/assets/105978561/9cd5f556-5a13-499e-8f48-c50746a27703)
-
-### Rooms page : 
-
-#### Cluster map : 
-![Screenshot (2)](https://github.com/VVSD-Charan/StayScout/assets/105978561/24488958-4b04-463c-94b1-7a6cd25bc689)
-
-#### Rooms
-![Screenshot (6)](https://github.com/VVSD-Charan/StayScout/assets/105978561/c1501fc0-f3c0-4a72-801b-42b84450b04f)
-
-### Room page : 
-![Screenshot (4)](https://github.com/VVSD-Charan/StayScout/assets/105978561/fa9b951e-7909-4a4f-b152-310131ab73c8)
 
