@@ -51,6 +51,12 @@
         <div class="result-box"></div>
     </div>
 
+    <div class="container content">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3" id="suggested">
+           
+        </div>
+    </div>
+
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const rooms = { features: <%-JSON.stringify(rooms) %>}
@@ -60,19 +66,24 @@
 
 <script>
     let availableKeyWords = [];
+    let suggestedRooms  = [];
 
     for(let i = 0 ; i < rooms.features.length ; i++)
     {
         availableKeyWords.push(rooms.features[i].location)
+        suggestedRooms.push(rooms.features[i])
     }
 
     console.log(availableKeyWords)
+    console.log(suggestedRooms);
 
     const resultsBox = document.querySelector(".result-box");
     const inputBox = document.getElementById("input-box");
+    const suggestedBox = document.getElementById("suggested")
 
     inputBox.onkeyup = function(){
         let result = [];
+        let resultrooms = [];
         let input = inputBox.value;
 
         if(input.length)
@@ -80,23 +91,37 @@
             result = availableKeyWords.filter((keyword)=>{
                return keyword.toLowerCase().includes(input.toLowerCase());
             });
+
+            resultrooms = suggestedRooms.filter((keyword)=>{
+                return keyword.location.toLowerCase().includes(input.toLowerCase());
+            })
+
             console.log(result)
+            console.log(resultrooms)
         }
-        display(result);
+        display(result,resultrooms);
 
         if(!result.length)
         {
             resultsBox.innerHTML = '';
+            suggestedBox.innerHTML = '';
         }
     }
 
-    function display(result)
+    function display(result,resultrooms)
     {
         const content = result.map((list)=>{
             return '<li onclick=selectInput(this)>' + list + '</li>'
         });
 
+        const roomContent = resultrooms.map((list)=>{
+            return `<ul style="color:white; text-decoration:none">` +  
+                        '<li style="list-style: none;">' + list.title + '</li>'
+                 + '</ul>'
+        })
+
         resultsBox.innerHTML = "<ul>"+ content.join('') +"</ul>";
+        suggestedBox.innerHTML = roomContent.join('');
     }
 
     function selectInput(list)
