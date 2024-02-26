@@ -59,6 +59,20 @@
             animation: slidein 7s infinite;
         }
 
+        .form-text{
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+        ::placeholder{
+            color: rgb(100, 98, 98) !important;
+        }
+        .form-text:focus{
+            background-color: transparent;
+            color: white;
+        }
+        
+
         @keyframes showup {
             0% {
                 opacity: 0;
@@ -223,9 +237,8 @@
 
                     <!-- Review text  -->
                     <div class="mb-3" style="margin-top: 2px;">
-                        <label class="form-label" for="body" style="color: white;">Review content </label>
-                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="6"
-                            required></textarea>
+                        <textarea class="form-control form-text" name="review[body]" id="body" cols="30" rows="6"
+                            required placeholder="Provide your experience"></textarea>
                         <div class="invalid-feedback" style="color: red;">
                             Please explain about your experience !
                         </div>

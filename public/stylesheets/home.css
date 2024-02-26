@@ -47,16 +47,17 @@ body{
     position: relative;
     letter-spacing: 2px;
     transition: 0.5s;
-    background: white;
+    background: transparent;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .animated-button:hover
 {
     letter-spacing: 4px;
-    background: var(--clr);
+    background: orange;
     color: black;
+    transition: 0.5s;
     box-shadow: 0 0 35px var(--clr);
 }
 
