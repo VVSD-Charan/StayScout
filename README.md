@@ -5,6 +5,7 @@
 ### Technologies and packages used in project :
 <ul>
   <li>MapBox (For including maps , adding location pins where rooms are available).</li>
+  <li>Cloudinary (For storing images uploaded by owners)</li>
   <li>Flash (To display messages like success of failed in cases like authentication)</li>
   <li>Passport.JS (An authentication middleware compatible with Node.JS)</li>
   <li>Embedded JavaScript (EJS)</li>
