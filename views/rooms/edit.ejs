@@ -1,81 +1,128 @@
 <% layout('layouts/boilerplate') %>
 
+<style>
+    .btn{
+        color: white;
+        padding: 5px 15px;
+    }
+    .inputBox{
+        position: relative;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .inputBox input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid white;
+        background:black;
+        border-radius: 5px;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        transition: 0.5s;
+    }
+    .inputBox span{
+        position: absolute;
+        left: 0;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 1em;
+        color: rgba(255,255,255,0.35);
+        text-transform: uppercase;
+        transition: 0.5s;
+    }
+    .inputBox input:valid ~ span,.inputBox input:focus ~ span{
+        color: white;
+        transform: translateX(10px) translateY(-7px);
+        font-size: 0.65em;
+        padding: 0 10px;
+        background: black;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        letter-spacing: 0.2em;
+    }
+    .inputBox input:valid,.inputBox input:focus{
+        border: 1px solid white;
+    }
+</style>
 
 <div class="row">
-    <h1 class="text-center mb-3">
+    <h1 class="text-center mb-3" style="color: white;">
         Edit room
     </h1>
     <div class="col-6 offset-3">
         <form action="/rooms/<%= room._id %>?_method=PUT" method="post" novalidate class="validated-form" enctype="multipart/form-data">
 
             <!-- Edit room title  -->
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="room[title]" value="<%= room.title %>" required>
+            <div class="inputBox">
+                <input type="text" name="room[title]" id="title" value="<%= room.title %>" required>
+                <span>Room name</span>
                 <div class="invalid-feedback">
-                    Please provide a title
+                    Room name is required!
                 </div>
             </div>
 
             <!-- Edit room location  -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
                 <input class="form-control" type="text" id="location" name="room[location]" value="<%= room.location %>" required>
                 <div class="invalid-feedback">
                     Please provide location of room
                 </div>
+            </div> -->
+            <div class="inputBox">
+                <input type="text" name="room[location]" id="location" value="<%= room.location %>" required>
+                <span>Room Location</span>
+                <div class="invalid-feedback">
+                    Room location is required!
+                </div>
             </div>
 
             <!-- Add more images  -->
-            <div class="mb-3">
-                <label for="image" class="form-label">Add more images</label>
-                <input class="form-control" type="file" id="image" multiple name="image">
+            <div class="inputBox">
+                <input type="file" name="image" id="image" multiple>
+                <span>Add room images</span>
             </div>
 
             <!-- Edit room price  -->
-            <div class="mb-3">
-                <label for="price" class="form-label">Room Rent</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="price-label">
-                        ₹
-                    </span>
-                    <input type="text" id="price" class="form-control" value="<%= room.price %>" aria-label="price" aria-describedby="price-label" name="room[price]" required>
-                    <div class="invalid-feedback">
-                        Please provide room rent price per month
-                    </div>
+            <div class="inputBox">
+                <input type="text" name="room[price]" id="price" value="<%= room.price %>" required>
+                <span>Room Price</span>
+                <div class="invalid-feedback">
+                    Room Price is required!
                 </div>
             </div>
 
             <!-- Edit room description  -->
-            <div class="mb-3">
-                <label class="form-label" for="description">Room Description</label>
-                <textarea class="form-control" type="text" id="description" name="room[description]"  required> <%= room.description %> </textarea>
+            <div class="inputBox">
+                <input type="text" name="room[description]" id="description" value="<%= room.description %>" required>
+                <span>Room Description</span>
                 <div class="invalid-feedback">
-                    Please provide description about room!
+                     Please provide description.
                 </div>
             </div>
 
             <!-- Delete images  -->
-            <div class="mb-3">
+            <div class="mb-3 mt-5">
                 <% room.images.forEach(function(img,i){ %>
-                   <div style="display: block;">
-                        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+                   <div style="display: block;" class="mt-3">
+                        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="" style="object-fit: contain; height: 120px; width: 120px;">
 
                         <div class="form-check-inline">
                             <input type="checkbox" name="deleteImages[]" id="image<%=i%>" value="<%=img.filename%>">
                         </div>
-                        <label for="image<%=i%>">Delete</label>
+                        <label for="image<%=i%>" style="color: white; font-size: 1em;">Delete this image</label>
                    </div>
                 <% }) %>
             </div>
 
             <!-- Submit button  -->
             <div class="mb-3" style="text-align: right;">
-                <button class="btn btn-danger">Update Room</button>
+                <button class="btn btn-outline-danger">Update Room</button>
             </div>
         </form>
 
-        <a href="/rooms/<%= room._id %>">Back To Room</a>
+        <a href="/rooms/<%= room._id %>" class="btn btn-outline-info"> <- Back To Room</a>
 
     </div>
 </div>
